@@ -31,10 +31,10 @@
             </objects>
             <point key="canvasLocation" x="-39" y="33"/>
         </scene>
-        <!--View Controller-->
+        <!--List View Controller-->
         <scene sceneID="wFI-kc-P7W">
             <objects>
-                <viewController id="Tmb-8M-RoD" sceneMemberID="viewController">
+                <viewController id="Tmb-8M-RoD" customClass="ListViewController" customModule="Pokedex" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="6bU-Ds-AyR"/>
                         <viewControllerLayoutGuide type="bottom" id="yRq-Zd-Vq2"/>
