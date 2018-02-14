@@ -8,6 +8,9 @@
 
 import Foundation
 
+var types = ["Bug", "Grass", "Dark", "Ground", "Dragon", "Ice", "Electric", "Normal", "Fairy",
+             "Poison", "Fighting", "Psychic", "Fire", "Rock", "Flying", "Steel", "Ghost", "Water"]
+
 class Pokemon {
     
     /* Note 1: 
