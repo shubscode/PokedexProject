@@ -43,11 +43,8 @@ class ViewController: UIViewController {
         // page setup
         titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: view.bounds.width, height: 120))
         titleLabel.text = "Pokédex"
-        //titleLabel.font = UIFont(name: "SanFranciscoDisplay-Regular ", size: 80)
-        //titleLabel.font = UIFont(name:"SanFranciscoDisplay-Black", size: 20.0)
         titleLabel.font = titleLabel.font.withSize(80)
         titleLabel.textColor = customPurple2
-        //titleLabel.font = UIFont (name: "SanFranciscoDisplay-Black", size: 100)
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         
@@ -55,7 +52,6 @@ class ViewController: UIViewController {
         scView = UIScrollView(frame: CGRect(x: 0, y: 250, width: view.bounds.width, height: 50))
         view.addSubview(scView)
         
-        //scView.backgroundColor = UIColor.lightPurple
         scView.translatesAutoresizingMaskIntoConstraints = false
         
         // adding type into buttons
@@ -127,20 +123,6 @@ class ViewController: UIViewController {
         backgroundImage.image = UIImage(named: "pokeBackground.png")
         backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0)
-        // set image
-//        let background = UIImageView()
-//        background.image = UIImage(named: "pokeBackground.png") // some UIImage
-//            background.frame = view.bounds
-//        background.contentMode = .scaleAspectFill
-//        background.clipsToBounds = true
-//        view.insertSubview(background, at: 0)
-//        // set tint
-//        let tint = UIView()
-//        tint = view.bounds
-//        tint = UIColor.red
-//        tint = 0.5
-//        view.insertSubview(tint, at: 1)
-        
     }
     
     func readInputs() {
