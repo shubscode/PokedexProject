@@ -10,10 +10,14 @@ import Foundation
 
 var types = ["Bug", "Grass", "Dark", "Ground", "Dragon", "Ice", "Electric", "Normal", "Fairy",
              "Poison", "Fighting", "Psychic", "Fire", "Rock", "Flying", "Steel", "Ghost", "Water"]
+var pokemonList = PokemonGenerator.getPokemonArray()
+
 
 func tagToType(tagNumber:Int) -> String {
     return types[tagNumber]
 }
+
+
 
 class Pokemon {
     

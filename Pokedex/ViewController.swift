@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    var titleLabel: UILabel!
+    
     var searchField: UITextField!
     // ScrollView
     var minAtkTextField: UITextField!
@@ -27,14 +29,26 @@ class ViewController: UIViewController {
     let buttonPadding:CGFloat = 10
     var xOffset:CGFloat = 10
     var typesSelected = Set<String>()
+    
+    var customPurple = UIColor(red: 0.6863, green: 0.2902, blue: 0.698, alpha: 1.0)
+    var customPurple2 =  UIColor(red: 0.5176, green: 0.4392, blue: 0.9569, alpha: 1.0)
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scView = UIScrollView(frame: CGRect(x: 0, y: 150, width: view.bounds.width, height: 50))
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: view.bounds.width, height: 120))
+        titleLabel.text = "Pokédex"
+        titleLabel.font = UIFont(name:"SanFranciscoDisplay-Black", size: 20.0)
+        titleLabel.font = titleLabel.font.withSize(80)
+        titleLabel.textColor = customPurple2
+        //titleLabel.font = UIFont (name: "SanFranciscoDisplay-Black", size: 100)
+        titleLabel.textAlignment = .center
+        view.addSubview(titleLabel)
+        
+        scView = UIScrollView(frame: CGRect(x: 0, y: 250, width: view.bounds.width, height: 50))
         view.addSubview(scView)
         
-        scView.backgroundColor = UIColor.white
+        //scView.backgroundColor = UIColor.lightPurple
         scView.translatesAutoresizingMaskIntoConstraints = false
         
         for type in types {
@@ -58,35 +72,68 @@ class ViewController: UIViewController {
         scView.contentSize = CGSize(width: xOffset, height: scView.frame.height)
         
         
-        searchField = UITextField(frame: CGRect(x: 20, y: 100, width: view.frame.width - 40, height: 50))
+        searchField = UITextField(frame: CGRect(x: 20, y: 190, width: view.frame.width - 40, height: 50))
         searchField.placeholder = "Pokemon Name"
         searchField.borderStyle = .roundedRect
         searchField.clipsToBounds = true
         view.addSubview(searchField)
         
-        minAtkTextField = UITextField(frame: CGRect(x: 20, y: 300, width: view.frame.width - 40, height: 50))
+        minAtkTextField = UITextField(frame: CGRect(x: 20, y: 390, width: view.frame.width - 40, height: 50))
         minAtkTextField.placeholder = "Minimum Attack Points"
         minAtkTextField.borderStyle = .roundedRect
         minAtkTextField.clipsToBounds = true
         view.addSubview(minAtkTextField)
         
-        minDefTextField = UITextField(frame: CGRect(x: 20, y: 400, width: view.frame.width - 40, height: 50))
+        minDefTextField = UITextField(frame: CGRect(x: 20, y: 470, width: view.frame.width - 40, height: 50))
         minDefTextField.placeholder = "Minimum Defense Points"
         minDefTextField.borderStyle = .roundedRect
         minDefTextField.clipsToBounds = true
         view.addSubview(minDefTextField)
         
-        minHpTextField = UITextField(frame: CGRect(x: 20, y: 500, width: view.frame.width - 40, height: 50))
+        minHpTextField = UITextField(frame: CGRect(x: 20, y: 550, width: view.frame.width - 40, height: 50))
         minHpTextField.placeholder = "Minimum Health Points"
         minHpTextField.borderStyle = .roundedRect
         minHpTextField.clipsToBounds = true
         view.addSubview(minHpTextField)
         
-        search = UIButton(frame: CGRect(x: 20, y: 600, width: view.frame.width - 40, height: 50))
-        search.backgroundColor = UIColor.black
+        search = UIButton(frame: CGRect(x: 20, y: 630, width: view.frame.width - 40, height: 50))
+        search.backgroundColor = customPurple2
+        search.layer.cornerRadius = 15
         search.setTitle("Search!", for: .normal)
         view.addSubview(search)
         search.addTarget(self, action: #selector(toSearch), for: .touchUpInside)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = true;
+    }
+    
+    override func loadView() {
+        view = UIView()
+        view.frame = UIScreen.main.bounds
+        setBackground()
+    }
+    
+    func setBackground() {
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "pokeBackground.png")
+        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
+        // set image
+//        let background = UIImageView()
+//        background.image = UIImage(named: "pokeBackground.png") // some UIImage
+//            background.frame = view.bounds
+//        background.contentMode = .scaleAspectFill
+//        background.clipsToBounds = true
+//        view.insertSubview(background, at: 0)
+//        // set tint
+//        let tint = UIView()
+//        tint = view.bounds
+//        tint = UIColor.red
+//        tint = 0.5
+//        view.insertSubview(tint, at: 1)
+        
     }
     
     func readInputs() {
@@ -131,7 +178,6 @@ class ViewController: UIViewController {
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("hello")
         if segue.identifier == "toSearch" {
             if let destinationVC = segue.destination as? ListViewController {
                 destinationVC.name = pokeName
@@ -161,11 +207,15 @@ class ViewController: UIViewController {
                             })
         })
         
-        sender.backgroundColor = .green
         let tag = sender.tag
-        
         let type = tagToType(tagNumber: tag)
-        typesSelected.insert(type)
+        if typesSelected.contains(type) {
+            typesSelected.remove(type)
+            sender.backgroundColor = .darkGray
+        } else {
+            typesSelected.insert(type)
+            sender.backgroundColor = customPurple
+        }
         print(typesSelected)
     }
     
