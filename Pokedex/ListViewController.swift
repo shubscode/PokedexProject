@@ -10,16 +10,21 @@ import UIKit
 
 class ListViewController: UIViewController {
     
+    //data storage from parameters screen
     var name: String?
     var pokeType = Set<String>()
     var atk: Int?
     var def: Int?
     var hp: Int?
     
+    var collectionView: UICollectionView!
+    var tableView: UITableView!
+    var sc: UISegmentedControl!
+    
     override func loadView() {
         super.loadView()
         let items = ["Grid", "List"]
-        let sc = UISegmentedControl(items: items)
+        sc = UISegmentedControl(items: items)
         sc.selectedSegmentIndex = 0
         
         sc.frame = CGRect(x: 25, y:80, width: view.frame.width-50, height: 40)
@@ -31,7 +36,13 @@ class ListViewController: UIViewController {
         sc.addTarget(self, action: #selector(changeColor), for: .valueChanged)
         
         self.view.addSubview(sc)
-        makeGrid()
+        
+        let layout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.purple
+        
+        view.addSubview(collectionView)
+        view.addSubview(sc)
     }
     
     func changeColor(sender: UISegmentedControl) {
@@ -57,12 +68,27 @@ class ListViewController: UIViewController {
     
     // renders collectionView
     func makeGrid() {
-        self.view.backgroundColor = UIColor.purple
+        tableView.removeFromSuperview()
+        sc.removeFromSuperview()
+        
+        let layout = UICollectionViewFlowLayout()
+        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.purple
+        
+        view.addSubview(collectionView)
+        view.addSubview(sc)
     }
     
     // renders tableView
     func makeList() {
-        self.view.backgroundColor = UIColor.green
+        collectionView.removeFromSuperview()
+        sc.removeFromSuperview()
+        
+        tableView = UITableView(frame: view.frame, style: UITableViewStyle.plain)
+        tableView.backgroundColor = UIColor.green
+        
+        view.addSubview(tableView)
+        view.addSubview(sc)
     }
     
 
