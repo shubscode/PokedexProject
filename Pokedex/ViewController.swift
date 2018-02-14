@@ -10,21 +10,25 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    // Pokemon Title
     var titleLabel: UILabel!
     
+    // Input Constraint Fields
     var searchField: UITextField!
-    // ScrollView
     var minAtkTextField: UITextField!
     var minDefTextField: UITextField!
     var minHpTextField: UITextField!
     
+    // Variables
     var pokeName: String!
     var minAtk: Int!
     var minDef: Int!
     var minHp: Int!
     
+    // Search Button
     var search: UIButton!
     
+    // ScrollView
     var scView:UIScrollView!
     let buttonPadding:CGFloat = 10
     var xOffset:CGFloat = 10
@@ -36,6 +40,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // page setup
         titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: view.bounds.width, height: 120))
         titleLabel.text = "Pokédex"
         titleLabel.font = UIFont(name:"SanFranciscoDisplay-Black", size: 20.0)
@@ -45,12 +50,14 @@ class ViewController: UIViewController {
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         
+        //scroll view
         scView = UIScrollView(frame: CGRect(x: 0, y: 250, width: view.bounds.width, height: 50))
         view.addSubview(scView)
         
         //scView.backgroundColor = UIColor.lightPurple
         scView.translatesAutoresizingMaskIntoConstraints = false
         
+        // adding type into buttons
         for type in types {
             let button = UIButton()
             button.setTitle(type, for: .normal)
@@ -70,7 +77,6 @@ class ViewController: UIViewController {
         }
         
         scView.contentSize = CGSize(width: xOffset, height: scView.frame.height)
-        
         
         searchField = UITextField(frame: CGRect(x: 20, y: 190, width: view.frame.width - 40, height: 50))
         searchField.placeholder = "Pokemon Name"
