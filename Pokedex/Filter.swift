@@ -27,10 +27,10 @@ func getPokemonImages(pokemon: [Pokemon]) -> [UIImage] {
 func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef: Int?, minHP: Int?) -> [Pokemon] {
     var filtered = pokemonList
     //nullChecks(name: name, typeFilter: typeFilter, minAtk: minAtk, minDef: minDef, minHP: minHP)
-    
-    if name != nil {
+    if let filterName = name {
+        print("Name is not null!")
         for pokemon in filtered {
-            if pokemon.name != name {
+            if pokemon.name != filterName {
                 let index = filtered.index(where: { (poke) -> Bool in
                     poke.name == pokemon.name
                 })
@@ -48,9 +48,9 @@ func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef:
             }
         }
     }
-    if minAtk != nil {
+    if let filterAtk = minAtk {
         for pokemon in filtered {
-            if pokemon.attack < minAtk! {
+            if pokemon.attack < filterAtk {
                 let index = filtered.index(where: { (poke) -> Bool in
                     poke.name == pokemon.name
                 })
@@ -58,9 +58,9 @@ func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef:
             }
         }
     }
-    if minDef != nil {
+    if let filterDef = minDef {
         for pokemon in filtered {
-            if pokemon.defense < minDef! {
+            if pokemon.defense < filterDef {
                 let index = filtered.index(where: { (poke) -> Bool in
                     poke.name == pokemon.name
                 })
@@ -68,9 +68,9 @@ func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef:
             }
         }
     }
-    if minHP != nil {
+    if let filterHP = minHP {
         for pokemon in filtered {
-            if pokemon.health < minHP! {
+            if pokemon.health < filterHP {
                 let index = filtered.index(where: { (poke) -> Bool in
                     poke.name == pokemon.name
                 })

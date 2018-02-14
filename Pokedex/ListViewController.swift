@@ -43,6 +43,9 @@ class ListViewController: UIViewController {
         
         filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
         filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
+        print(filteredPokemonInfo)
+        print("IMAGES:")
+        print(filteredPokemon)
 //        print(filteredPokemon2[0].name)
         
         let layout = UICollectionViewFlowLayout()
