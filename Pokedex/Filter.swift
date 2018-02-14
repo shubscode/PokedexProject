@@ -19,6 +19,7 @@ var filterHP: Int!
 func getPokemonImages(pokemon: [Pokemon]) -> [UIImage] {
     var images = [UIImage]()
     for poke in pokemon {
+        print("I'm going into the for loop and getting images")
         images.append(getImageFromURL(imageUrl: poke.imageUrl))
     }
     return images

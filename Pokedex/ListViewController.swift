@@ -22,6 +22,8 @@ class ListViewController: UIViewController {
     var sc: UISegmentedControl!
     
 //    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
+//    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke")]
+//    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
     var filteredPokemonInfo = [Pokemon]()
     var filteredPokemon = [UIImage]()
     
@@ -42,10 +44,12 @@ class ListViewController: UIViewController {
         self.view.addSubview(sc)
         
         filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
+        print(filteredPokemonInfo[0].imageUrl)
         filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
-        print(filteredPokemonInfo)
-        print("IMAGES:")
         print(filteredPokemon)
+//        print(filteredPokemonInfo)
+//        print("IMAGES:")
+//        print(filteredPokemon)
 //        print(filteredPokemon2[0].name)
         
         let layout = UICollectionViewFlowLayout()
@@ -135,12 +139,14 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     // specifying number of sections in the CV
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return filteredPokemon.count/2
+        return 1
+//        return filteredPokemon.count/2
     }
     
     // specifying number of cells in the given section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return filteredPokemon.count
+//        return 2
     }
     
     // use this method to dequeue the cell and set it up
