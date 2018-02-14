@@ -12,9 +12,14 @@ class ViewController: UIViewController {
     
     var searchField: UITextField!
     // ScrollView
-    var minAtk: UITextField!
-    var minDef: UITextField!
-    var minHp: UITextField!
+    var minAtkTextField: UITextField!
+    var minDefTextField: UITextField!
+    var minHpTextField: UITextField!
+    
+    var pokeName: String!
+    var minAtk: Int!
+    var minDef: Int!
+    var minHp: Int!
     
     var search: UIButton!
     
@@ -59,23 +64,23 @@ class ViewController: UIViewController {
         searchField.clipsToBounds = true
         view.addSubview(searchField)
         
-        minAtk = UITextField(frame: CGRect(x: 20, y: 300, width: view.frame.width - 40, height: 50))
-        minAtk.placeholder = "Minimum Attack Points"
-        minAtk.borderStyle = .roundedRect
-        minAtk.clipsToBounds = true
-        view.addSubview(minAtk)
+        minAtkTextField = UITextField(frame: CGRect(x: 20, y: 300, width: view.frame.width - 40, height: 50))
+        minAtkTextField.placeholder = "Minimum Attack Points"
+        minAtkTextField.borderStyle = .roundedRect
+        minAtkTextField.clipsToBounds = true
+        view.addSubview(minAtkTextField)
         
-        minDef = UITextField(frame: CGRect(x: 20, y: 400, width: view.frame.width - 40, height: 50))
-        minDef.placeholder = "Minimum Defense Points"
-        minDef.borderStyle = .roundedRect
-        minDef.clipsToBounds = true
-        view.addSubview(minDef)
+        minDefTextField = UITextField(frame: CGRect(x: 20, y: 400, width: view.frame.width - 40, height: 50))
+        minDefTextField.placeholder = "Minimum Defense Points"
+        minDefTextField.borderStyle = .roundedRect
+        minDefTextField.clipsToBounds = true
+        view.addSubview(minDefTextField)
         
-        minHp = UITextField(frame: CGRect(x: 20, y: 500, width: view.frame.width - 40, height: 50))
-        minHp.placeholder = "Minimum Health Points"
-        minHp.borderStyle = .roundedRect
-        minHp.clipsToBounds = true
-        view.addSubview(minHp)
+        minHpTextField = UITextField(frame: CGRect(x: 20, y: 500, width: view.frame.width - 40, height: 50))
+        minHpTextField.placeholder = "Minimum Health Points"
+        minHpTextField.borderStyle = .roundedRect
+        minHpTextField.clipsToBounds = true
+        view.addSubview(minHpTextField)
         
         search = UIButton(frame: CGRect(x: 20, y: 600, width: view.frame.width - 40, height: 50))
         search.backgroundColor = UIColor.black
@@ -84,12 +89,62 @@ class ViewController: UIViewController {
         search.addTarget(self, action: #selector(toSearch), for: .touchUpInside)
     }
     
+    func readInputs() {
+        if let name = searchField.text {
+            pokeName = name
+        }
+        if let attack = minAtkTextField.text {
+            if attack != "" {
+                if let attack = Int(attack) {
+                    minAtk = Int(attack)
+                } else {
+                    raiseInvalidTypeAlert(info: "Attack")
+                }
+            }
+        }
+        if let defense = minDefTextField.text {
+            if defense != "" {
+                if let defense = Int(defense) {
+                    minDef = Int(defense)
+                } else {
+                    raiseInvalidTypeAlert(info: "Defense")
+                }
+            }
+        }
+        if let hp = minHpTextField.text {
+            if hp != "" {
+                if let hp = Int(hp) {
+                    minHp = Int(hp)
+                } else {
+                    raiseInvalidTypeAlert(info: "Hitpoint")
+                }
+            }
+            
+        }
+    }
+    
+    func raiseInvalidTypeAlert(info: String) {
+        let alert = UIAlertController(title: "Invalid \(info) Information", message: "Please enter intger values for this field", preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
+        print("hello")
+        if segue.identifier == "toSearch" {
+            if let destinationVC = segue.destination as? ListViewController {
+                destinationVC.name = pokeName
+                destinationVC.pokeType = typesSelected
+                destinationVC.atk = minAtk
+                destinationVC.def = minDef
+                destinationVC.hp = minHp
+            }
+        }
     }
     
     @IBAction func toSearch (_ sender: Any) {
+        readInputs()
         self.performSegue(withIdentifier: "toSearch", sender: sender)
         
     }
