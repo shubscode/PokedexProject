@@ -21,6 +21,9 @@ class ListViewController: UIViewController {
     var tableView: UITableView!
     var sc: UISegmentedControl!
     
+    var filteredPokemon = [#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex")]
+//    var filteredPokemon: [Pokemon] = []
+    
     override func loadView() {
         super.loadView()
         let items = ["Grid", "List"]
@@ -33,19 +36,30 @@ class ListViewController: UIViewController {
         sc.backgroundColor = UIColor.black
         sc.tintColor = UIColor.white
         
-        sc.addTarget(self, action: #selector(changeColor), for: .valueChanged)
+        sc.addTarget(self, action: #selector(changeView), for: .valueChanged)
         
         self.view.addSubview(sc)
         
         let layout = UICollectionViewFlowLayout()
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.purple
+//        layout.minimumLineSpacing = 0
+//        layout.minimumInteritemSpacing = 0
+        collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
+                                          collectionViewLayout: layout)
+        collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
+        collectionView.backgroundColor = UIColor.white
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         view.addSubview(collectionView)
         view.addSubview(sc)
     }
     
-    func changeColor(sender: UISegmentedControl) {
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false;
+    }
+    
+    func changeView(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 1:
             makeList()
@@ -66,17 +80,22 @@ class ListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // renders collectionView
+    // set up collectionView
     func makeGrid() {
         tableView.removeFromSuperview()
-        sc.removeFromSuperview()
         
         let layout = UICollectionViewFlowLayout()
-        collectionView = UICollectionView(frame: view.frame, collectionViewLayout: layout)
-        collectionView.backgroundColor = UIColor.purple
+//        layout.minimumLineSpacing = 0
+//        layout.minimumInteritemSpacing = 0
+        collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
+                                          collectionViewLayout: layout)
+        collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
+        collectionView.backgroundColor = UIColor.white
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
         
         view.addSubview(collectionView)
-        view.addSubview(sc)
     }
     
     // renders tableView
@@ -91,6 +110,7 @@ class ListViewController: UIViewController {
         view.addSubview(sc)
     }
     
+    
 
     /*
     // MARK: - Navigation
@@ -102,4 +122,34 @@ class ListViewController: UIViewController {
     }
     */
 
+}
+
+extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+    
+    // specifying number of sections in the CV
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 2
+    }
+    
+    // specifying number of cells in the given section
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return filteredPokemon.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "poke", for: indexPath) as!
+        PokemonCollectionViewCell
+        cell.awakeFromNib()
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        let pokeCell = cell as! PokemonCollectionViewCell
+        pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height:200)
+    }
+    
 }
