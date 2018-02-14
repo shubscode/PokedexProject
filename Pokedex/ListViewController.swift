@@ -9,43 +9,37 @@
 import UIKit
 
 class ListViewController: UIViewController {
-
+    
+    var name: String?
+    var pokeType = Set<String>()
+    var atk: Int?
+    var def: Int?
+    var hp: Int?
     
     override func loadView() {
         super.loadView()
         let items = ["Grid", "List"]
-        let sc = UISegmentedControl(frame: CGRect(x: view.frame.width/2-62, y:50, width: view.frame.width-40, height: 50))
-        
-        (items: items)
+        let sc = UISegmentedControl(items: items)
         sc.selectedSegmentIndex = 0
         
-//        let frame = UIScreen.main.bounds
-//        sc.frame = CGRect(
-//
-//        (frame:frame.minX + 10, frame.minY + 50,
-//                                    frame.width - 20, frame.height*0.1)
+        sc.frame = CGRect(x: 25, y:80, width: view.frame.width-50, height: 40)
         
         sc.layer.cornerRadius = 5.0
         sc.backgroundColor = UIColor.black
         sc.tintColor = UIColor.white
         
         sc.addTarget(self, action: #selector(changeColor), for: .valueChanged)
+        
         self.view.addSubview(sc)
-
-
-        
-        
-        self.view.backgroundColor = UIColor.purple
+        makeGrid()
     }
     
     func changeColor(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 1:
-            self.view.backgroundColor = UIColor.green
-        case 2:
-            self.view.backgroundColor = UIColor.blue
+            makeList()
         default:
-            self.view.backgroundColor = UIColor.purple
+            makeGrid()
         }
     }
     
@@ -59,6 +53,16 @@ class ListViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    // renders collectionView
+    func makeGrid() {
+        self.view.backgroundColor = UIColor.purplex
+    }
+    
+    // renders tableView
+    func makeList() {
+        self.view.backgroundColor = UIColor.green
     }
     
 
