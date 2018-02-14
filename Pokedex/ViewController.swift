@@ -38,7 +38,8 @@ class ViewController: UIViewController {
         
         titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: view.bounds.width, height: 120))
         titleLabel.text = "Pokédex"
-        titleLabel.font = UIFont(name:"SanFranciscoDisplay-Black", size: 20.0)
+        //titleLabel.font = UIFont(name: "SanFranciscoDisplay-Regular ", size: 80)
+        //titleLabel.font = UIFont(name:"SanFranciscoDisplay-Black", size: 20.0)
         titleLabel.font = titleLabel.font.withSize(80)
         titleLabel.textColor = customPurple2
         //titleLabel.font = UIFont (name: "SanFranciscoDisplay-Black", size: 100)
