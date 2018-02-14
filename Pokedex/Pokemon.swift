@@ -7,16 +7,44 @@
 //
 
 import Foundation
+import UIKit
 
 var types = ["Bug", "Grass", "Dark", "Ground", "Dragon", "Ice", "Electric", "Normal", "Fairy",
              "Poison", "Fighting", "Psychic", "Fire", "Rock", "Flying", "Steel", "Ghost", "Water"]
 var pokemonList = PokemonGenerator.getPokemonArray()
 
+var favoritePokemon = [Pokemon]()
 
 
 
 func tagToType(tagNumber:Int) -> String {
     return types[tagNumber]
+}
+
+func getImageFromURL(imageUrl: String) -> UIImage {
+    var imageToDisplay = UIImage(named: "Pokedex")
+    let url = URL(string: imageUrl)!
+    let session = URLSession(configuration: .default)
+    let downloadPicTask = session.dataTask(with: url) { (data, response, error) in
+        if let e = error {
+            print("Error downloading picture: \(e)")
+        } else {
+            if let _ = response as? HTTPURLResponse {
+                if let imageData = data {
+                    DispatchQueue.main.async {
+                        let pokemonImage = UIImage(data: imageData)
+                        imageToDisplay = pokemonImage
+                    }
+                } else {
+                    print("Couldn't get image: Image is nil")
+                }
+            } else {
+                print("Couldn't get response code")
+            }
+        }
+    }
+    downloadPicTask.resume()
+    return imageToDisplay!
 }
 
 
@@ -48,6 +76,7 @@ class Pokemon {
     let total: Int!
     let types: [String]
     let imageUrl: String!
+    
     
     init(name: String, number: Int, attack: Int, defense: Int, health: Int, spAttack: Int, spDef: Int, species: String, speed: Int, total: Int, types: [String]) {
         self.name = name
