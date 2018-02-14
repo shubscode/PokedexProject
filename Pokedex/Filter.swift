@@ -22,40 +22,50 @@ func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef:
     if name != nil {
         for pokemon in filtered {
             if pokemon.name != name {
-                let index = filtered.index(of: pokemon)
-                filtered.remove(at: index)
+                let index = filtered.index(where: { (poke) -> Bool in
+                    poke.name == pokemon.name
+                })
+                filtered.remove(at: index!)
             }
         }
     }
     if !typeFilter.isEmpty {
         for pokemon in filtered {
             if setNotContainsTypes(typeFilter: typeFilter, currentTypes: pokemon.types) {
-                let index = filtered.index(of: pokemon)
-                filtered.remove(at: index)
+                let index = filtered.index(where: { (poke) -> Bool in
+                    poke.name == pokemon.name
+                })
+                filtered.remove(at: index!)
             }
         }
     }
     if minAtk != nil {
         for pokemon in filtered {
             if pokemon.attack < minAtk! {
-                let index = filtered.index(of: pokemon)
-                filtered.remove(at: index)
+                let index = filtered.index(where: { (poke) -> Bool in
+                    poke.name == pokemon.name
+                })
+                filtered.remove(at: index!)
             }
         }
     }
     if minDef != nil {
         for pokemon in filtered {
             if pokemon.defense < minDef! {
-                let index = filtered.index(of: pokemon)
-                filtered.remove(at: index)
+                let index = filtered.index(where: { (poke) -> Bool in
+                    poke.name == pokemon.name
+                })
+                filtered.remove(at: index!)
             }
         }
     }
     if minHP != nil {
         for pokemon in filtered {
             if pokemon.health < minHP! {
-                let index = filtered.index(of: pokemon)
-                filtered.remove(at: index)
+                let index = filtered.index(where: { (poke) -> Bool in
+                    poke.name == pokemon.name
+                })
+                filtered.remove(at: index!)
             }
         }
     }
