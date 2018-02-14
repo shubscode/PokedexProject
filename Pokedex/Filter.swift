@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 var filterName: String!
 var filterPokeType = Set<String>()
@@ -14,6 +15,14 @@ var filterAtk: Int!
 var filterDef: Int!
 var filterHP: Int!
 
+
+func getPokemonImages(pokemon: [Pokemon]) -> [UIImage] {
+    var images = [UIImage]()
+    for poke in pokemon {
+        images.append(getImageFromURL(imageUrl: poke.imageUrl))
+    }
+    return images
+}
 
 func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef: Int?, minHP: Int?) -> [Pokemon] {
     var filtered = pokemonList

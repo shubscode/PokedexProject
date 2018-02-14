@@ -21,8 +21,9 @@ class ListViewController: UIViewController {
     var tableView: UITableView!
     var sc: UISegmentedControl!
     
-    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
-    var filteredPokemon2: [Pokemon] = []
+//    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
+    var filteredPokemonInfo = [Pokemon]()
+    var filteredPokemon = [UIImage]()
     
     override func loadView() {
         super.loadView()
@@ -40,7 +41,8 @@ class ListViewController: UIViewController {
         
         self.view.addSubview(sc)
         
-        filteredPokemon2 = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
+        filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
+        filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
 //        print(filteredPokemon2[0].name)
         
         let layout = UICollectionViewFlowLayout()
