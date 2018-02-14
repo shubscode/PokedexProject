@@ -53,8 +53,8 @@ class PokemonInfoViewController: UIViewController {
         super.viewDidLoad()
         
         imageView = UIImageView(frame: CGRect(x: 20, y: 80, width: view.bounds.width - 40, height: 240))
-        imageView.image = UIImage(named: "Pokedex")
-        imageView.contentMode = .scaleAspectFill
+        imageView.image = UIImage(named: "placeholderpoke.jpg")
+        imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
         view.addSubview(imageView)

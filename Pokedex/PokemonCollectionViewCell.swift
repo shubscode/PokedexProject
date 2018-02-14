@@ -19,17 +19,18 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     var delegate: PokemonCollectionViewCellDelegate? = nil
     
     override func awakeFromNib() {
-        pokeImageView = UIImageView(frame: CGRect(x:15, y:15, width: 320, height:160))
+        pokeImageView = UIImageView(frame: CGRect(x:15, y:15, width: 100, height:100))
 //        pokeImageView.contentMode = .scaleAspectFill
         pokeImageView.layer.cornerRadius = 10
         pokeImageView.clipsToBounds = true
+        pokeImageView.layer.borderColor = UIColor.black.cgColor
         contentView.addSubview(pokeImageView) //remember to add UI elements to the contentView not the cell itself
         
-        button = UIButton(frame: CGRect(x:15, y:15, width: 320, height:160))
-        button.backgroundColor = UIColor.green
+        button = UIButton(frame: CGRect(x:15, y:15, width: 100, height:100))
         pokeImageView.layer.cornerRadius = 10
         pokeImageView.clipsToBounds = true
-        contentView.addSubview(pokeImageView) //remember to add UI elements to the contentView not the cell itself
+        button.addTarget(self, action: #selector(toProfile), for: .touchUpInside)
+        contentView.addSubview(button)
     }
     
     func toProfile() {

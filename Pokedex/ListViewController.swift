@@ -21,7 +21,7 @@ class ListViewController: UIViewController {
     var tableView: UITableView!
     var sc: UISegmentedControl!
     
-    var filteredPokemon = [#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex")]
+    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
     var filteredPokemon2: [Pokemon] = []
     
     override func loadView() {
@@ -41,7 +41,7 @@ class ListViewController: UIViewController {
         self.view.addSubview(sc)
         
         filteredPokemon2 = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
-        print(filteredPokemon2[0].name)
+//        print(filteredPokemon2[0].name)
         
         let layout = UICollectionViewFlowLayout()
 //        layout.minimumLineSpacing = 200
