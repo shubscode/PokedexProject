@@ -12,15 +12,12 @@ var types = ["Bug", "Grass", "Dark", "Ground", "Dragon", "Ice", "Electric", "Nor
              "Poison", "Fighting", "Psychic", "Fire", "Rock", "Flying", "Steel", "Ghost", "Water"]
 var pokemonList = PokemonGenerator.getPokemonArray()
 
-func random20() -> [Pokemon] {
-    let pokemons = Array(pokemonList[0...20])
-    return pokemons
-}
+
+
 
 func tagToType(tagNumber:Int) -> String {
     return types[tagNumber]
 }
-
 
 
 class Pokemon {
