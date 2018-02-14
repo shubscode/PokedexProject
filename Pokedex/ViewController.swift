@@ -21,6 +21,7 @@ class ViewController: UIViewController {
     var scView:UIScrollView!
     let buttonPadding:CGFloat = 10
     var xOffset:CGFloat = 10
+    var typesSelected = Set<String>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,7 +39,8 @@ class ViewController: UIViewController {
             button.layer.cornerRadius = 10
             button.clipsToBounds = true
             button.setTitle("\(type)", for: .normal)
-            //button.addTarget(self, action: #selector(btnTouch), for: UIControlEvents.touchUpInside)
+            button.tag = types.index(of: type)!
+            button.addTarget(self, action: #selector(typeSelect), for: .touchUpInside)
             
             button.frame = CGRect(x: xOffset, y: CGFloat(buttonPadding), width: 70, height: 30)
             
@@ -83,9 +85,33 @@ class ViewController: UIViewController {
     }
     
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+    }
+    
     @IBAction func toSearch (_ sender: Any) {
         self.performSegue(withIdentifier: "toSearch", sender: sender)
         
+    }
+    
+    @objc func typeSelect(sender: UIButton) {
+        
+        UIButton.animate(withDuration: 0.2,
+                         animations: {
+                            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
+        },
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity
+                            })
+        })
+        
+        sender.backgroundColor = .green
+        let tag = sender.tag
+        
+        let type = tagToType(tagNumber: tag)
+        typesSelected.insert(type)
+        print(typesSelected)
     }
     
 

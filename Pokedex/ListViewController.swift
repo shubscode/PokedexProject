@@ -57,7 +57,7 @@ class ListViewController: UIViewController {
     
     // renders collectionView
     func makeGrid() {
-        self.view.backgroundColor = UIColor.purplex
+        self.view.backgroundColor = UIColor.purple
     }
     
     // renders tableView
