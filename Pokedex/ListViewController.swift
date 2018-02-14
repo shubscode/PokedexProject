@@ -22,7 +22,7 @@ class ListViewController: UIViewController {
     var sc: UISegmentedControl!
     
     var filteredPokemon = [#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex")]
-//    var filteredPokemon: [Pokemon] = []
+    var filteredPokemon2: [Pokemon] = []
     
     override func loadView() {
         super.loadView()
@@ -39,6 +39,9 @@ class ListViewController: UIViewController {
         sc.addTarget(self, action: #selector(changeView), for: .valueChanged)
         
         self.view.addSubview(sc)
+        
+        filteredPokemon2 = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
+        print(filteredPokemon2[0].name)
         
         let layout = UICollectionViewFlowLayout()
 //        layout.minimumLineSpacing = 200
@@ -135,18 +138,22 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         return 2
     }
     
+    // use this method to dequeue the cell and set it up
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "poke", for: indexPath)
             as!PokemonCollectionViewCell
         cell.awakeFromNib()
+        cell.delegate = self
         return cell
     }
     
+    // use this method to populate the data of a given cell
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pokeCell = cell as! PokemonCollectionViewCell
         pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
     }
     
+    // sets the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: 160, height:160)
@@ -158,4 +165,15 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
     }
     
+//    // if we want something to happen when user taps a cell, use this method
+//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+//        <#code#>
+//    }
+    
+}
+
+extension ListViewController: PokemonCollectionViewCellDelegate {
+    func toProfile(forCell: PokemonCollectionViewCell) {
+        self.performSegue(withIdentifier: "toProfile", sender: Any)
+    }
 }
