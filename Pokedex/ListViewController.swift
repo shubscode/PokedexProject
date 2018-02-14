@@ -21,7 +21,7 @@ class ListViewController: UIViewController {
     var tableView: UITableView!
     var sc: UISegmentedControl!
     
-    var filteredPokemon = [#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex")]
+    var filteredPokemon = [#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex"),#imageLiteral(resourceName: "Pokedex")]
 //    var filteredPokemon: [Pokemon] = []
     
     override func loadView() {
@@ -41,8 +41,8 @@ class ListViewController: UIViewController {
         self.view.addSubview(sc)
         
         let layout = UICollectionViewFlowLayout()
-//        layout.minimumLineSpacing = 0
-//        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 200
+        layout.minimumInteritemSpacing = 0
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
@@ -101,13 +101,12 @@ class ListViewController: UIViewController {
     // renders tableView
     func makeList() {
         collectionView.removeFromSuperview()
-        sc.removeFromSuperview()
         
-        tableView = UITableView(frame: view.frame, style: UITableViewStyle.plain)
+        tableView = UITableView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
+                                style: UITableViewStyle.plain)
         tableView.backgroundColor = UIColor.green
         
         view.addSubview(tableView)
-        view.addSubview(sc)
     }
     
     
@@ -128,17 +127,17 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     // specifying number of sections in the CV
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        return filteredPokemon.count/2
     }
     
     // specifying number of cells in the given section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return filteredPokemon.count
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "poke", for: indexPath) as!
-        PokemonCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "poke", for: indexPath)
+            as!PokemonCollectionViewCell
         cell.awakeFromNib()
         return cell
     }
@@ -149,7 +148,14 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height:200)
+        
+        return CGSize(width: 160, height:160)
+        
+//        let padding: CGFloat =  50
+//        let collectionViewSize = collectionView.frame.size.width - padding
+//
+//        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
+        
     }
     
 }

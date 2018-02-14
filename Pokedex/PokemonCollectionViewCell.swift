@@ -12,9 +12,9 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     var pokeImageView: UIImageView!
     
     override func awakeFromNib() {
-        pokeImageView = UIImageView(frame: contentView.frame)
-        pokeImageView.contentMode = .scaleAspectFill
-        pokeImageView.layer.cornerRadius = 10
+        pokeImageView = UIImageView(frame: CGRect(x:15, y:15, width: 320, height:160))
+//        pokeImageView.contentMode = .scaleAspectFill
+        pokeImageView.layer.cornerRadius = 10;
         pokeImageView.clipsToBounds = true
         contentView.addSubview(pokeImageView) //remember to add UI elements to the contentView not the cell itself 
     }
