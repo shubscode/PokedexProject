@@ -186,7 +186,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // sets the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 105, height:105)
+        return CGSize(width: view.frame.width/3, height:105)
         
         
 //        let padding: CGFloat =  50
@@ -248,13 +248,13 @@ extension ListViewController: PokemonCollectionViewCellDelegate {
         if segue.identifier == "toProfile" {
             print("I WENT HERE")
 
-            if let destinationVC = segue.destination as? PokemonInfoViewController {
-                print("I WENT HERE !!!!!!!")
+            let destinationVC = segue.destination as! TabBarController
+            print("I WENT HERE !!!!!!!")
 
-                print(filteredPokemonInfo[0])
-//                destinationVC.pokemonSelected = filteredPokemonInfo[0]
+            print(filteredPokemonInfo[0])
+            destinationVC.pokemonHolder = filteredPokemonInfo[0]
                 //                print(filteredPokemonInfo[0])
-            }
+            
         }
     }
     
