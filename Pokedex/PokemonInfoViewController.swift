@@ -56,8 +56,8 @@ class PokemonInfoViewController: UIViewController {
         super.viewDidLoad()
         
         imageView = UIImageView(frame: CGRect(x: 20, y: 80, width: view.bounds.width - 40, height: 240))
-        let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
-        imageView.image = pokeImage
+//        let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
+//        imageView.image = pokeImage
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10

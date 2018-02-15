@@ -16,6 +16,7 @@ protocol PokemonCollectionViewCellDelegate {
 class PokemonCollectionViewCell: UICollectionViewCell {
     var pokeImageView: UIImageView!
     var button: UIButton!
+    var name: UILabel!
     var delegate: PokemonCollectionViewCellDelegate? = nil
     
     override func awakeFromNib() {
@@ -27,10 +28,17 @@ class PokemonCollectionViewCell: UICollectionViewCell {
         contentView.addSubview(pokeImageView) //remember to add UI elements to the contentView not the cell itself
         
         button = UIButton(frame: CGRect(x:20, y:15, width: 100, height:100))
-        pokeImageView.layer.cornerRadius = 10
-        pokeImageView.clipsToBounds = true
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        button.tag = 34
         button.addTarget(self, action: #selector(toProfile), for: .touchUpInside)
         contentView.addSubview(button)
+        
+        name = UILabel(frame: CGRect(x:2, y:98, width: 100, height:20))
+        name.text = "Pokemon"
+        name.textColor = UIColor.gray
+        name.shadowColor = UIColor.gray
+        contentView.addSubview(name)
     }
     
     func toProfile() {

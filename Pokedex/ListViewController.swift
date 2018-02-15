@@ -23,8 +23,7 @@ class ListViewController: UIViewController {
     
     var filteredPokemonInfo = [Pokemon]()
     var filteredPokemon = [UIImage]()
-
-//    var thePokemon = Pokemon!
+    var thePokemon: Pokemon!
 
     var randomlyGenerated = false
     
@@ -113,12 +112,13 @@ class ListViewController: UIViewController {
         tableView.removeFromSuperview()
         
         let layout = UICollectionViewFlowLayout()
-//        layout.minimumLineSpacing = 0
-//        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 5
+        layout.minimumInteritemSpacing = 0
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
         collectionView.backgroundColor = UIColor.white
+        collectionView.clipsToBounds = true
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -265,6 +265,9 @@ extension ListViewController: PokemonCollectionViewCellDelegate {
 //            }
 //        }
         
-        self.performSegue(withIdentifier: "toProfile", sender: (Any).self)
+//        thePokemon = getPokeName()
+        
+        self.performSegue(withIdentifier: "toProfile", sender: UIButton)
     }
+    
 }
