@@ -23,14 +23,18 @@ class ListViewController: UIViewController {
     
     var filteredPokemonInfo = [Pokemon]()
     var filteredPokemon = [UIImage]()
+
 //    var thePokemon = Pokemon!
+
+    var randomlyGenerated = false
     
     
     
     override func loadView() {
         
-        filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
-        
+        if !randomlyGenerated {
+            filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
+        }
         filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
         
         print("Load Count: \(filteredPokemon.count)")

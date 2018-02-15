@@ -15,6 +15,14 @@ var pokemonList = PokemonGenerator.getPokemonArray()
 
 var favoritePokemon = [Pokemon]()
 
+func generateRandomPokemon() -> [Pokemon] {
+    var randomPokemons = [Pokemon]()
+    for _ in 1...20 {
+        let randomIndex = Int(arc4random_uniform(UInt32(pokemonList.count))) - 1
+        randomPokemons.append(pokemonList[randomIndex])
+    }
+    return randomPokemons
+}
 
 
 func tagToType(tagNumber:Int) -> String {
@@ -40,39 +48,6 @@ func getImageFromURL(imageUrl: String) -> UIImage {
     }
 }
     
-            
-            
-//            if let e = error {
-//                print("Error downloading picture: \(e)")
-//            } else {
-//                //print("I'm downloading")
-//                if let _ = response as? HTTPURLResponse {
-//                    if let imageData = data {
-//                        //DispatchQueue.main.async {
-//                            //print("I'm changing the image to: ")
-//                            let pokemonImage = UIImage(data: imageData)
-//                            print("Pokemon image: \(pokemonImage!)")
-//                            imageToDisplay = pokemonImage
-//                            print(imageToDisplay!)
-//                        //}
-//                    } else {
-//                        print("Couldn't get image: Image is nil")
-//                    }
-//                } else {
-//                    print("Couldn't get response code")
-//                }
-//            }
-        //}
-        //print("I get here1")
-        //downloadPicTask.resume()
-    //}
-    //print("I get here2")
-    //print(imageToDisplay)
-//    print(imageToDisplay!)
-//    print(imageToDisplay!)
-//    return imageToDisplay!
-//}
-
 
 class Pokemon {
     

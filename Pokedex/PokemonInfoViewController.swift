@@ -56,7 +56,8 @@ class PokemonInfoViewController: UIViewController {
         super.viewDidLoad()
         
         imageView = UIImageView(frame: CGRect(x: 20, y: 80, width: view.bounds.width - 40, height: 240))
-        imageView.image = UIImage(named: "placeholderpoke.jpg")
+        let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
+        imageView.image = pokeImage
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
@@ -148,9 +149,24 @@ class PokemonInfoViewController: UIViewController {
         view.addSubview(totalLabel)
     }
     
-    @objc func addToFavorites() {
+
+    @objc func addToFavorites(sender: UIButton) {
+        UIButton.animate(withDuration: 0.2,
+                         animations: {
+                            sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
+        },
+                         completion: { finish in
+                            UIButton.animate(withDuration: 0.2, animations: {
+                                sender.transform = CGAffineTransform.identity
+                            })
+        })
+        
             favoritePokemon.append(pokemonSelected!)
+        let alert = UIAlertController(title: "Added To Favorites!", message: "\(pokemonSelected?.name) has been added to your favorites", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
     }
+    
 
     
     
