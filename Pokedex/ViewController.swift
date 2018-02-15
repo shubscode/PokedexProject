@@ -45,13 +45,13 @@ class ViewController: UIViewController {
         // page setup
         titleLabel = UILabel(frame: CGRect(x: 0, y: 40, width: view.bounds.width, height: 120))
         titleLabel.text = "Pokédex"
-        titleLabel.font = titleLabel.font.withSize(80)
+        titleLabel.font = titleLabel.font.withSize(90)
         titleLabel.textColor = customPurple2
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         
         //scroll view
-        scView = UIScrollView(frame: CGRect(x: 0, y: 250, width: view.bounds.width, height: 50))
+        scView = UIScrollView(frame: CGRect(x: 0, y: 250, width: view.bounds.width, height: 70))
         view.addSubview(scView)
         
         scView.translatesAutoresizingMaskIntoConstraints = false
@@ -67,8 +67,7 @@ class ViewController: UIViewController {
             button.tag = types.index(of: type)!
             button.addTarget(self, action: #selector(typeSelect), for: .touchUpInside)
             
-            button.frame = CGRect(x: xOffset, y: CGFloat(buttonPadding), width: 70, height: 30)
-            
+            button.frame = CGRect(x: xOffset, y: CGFloat(buttonPadding), width: 80, height: 50)
             xOffset = xOffset + CGFloat(buttonPadding) + button.frame.size.width
             scView.addSubview(button)
             
