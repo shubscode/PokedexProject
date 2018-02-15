@@ -91,7 +91,7 @@ class PokemonInfoViewController: UIViewController {
         favoriteButton.layer.cornerRadius = 15
         favoriteButton.setTitle("Add To Favorites!", for: .normal)
         view.addSubview(favoriteButton)
-        //search.addTarget(self, action: #selector(toSearch), for: .touchUpInside)
+        favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         
         webSearchButton = UIButton(frame: CGRect(x: 20, y: 620, width: view.frame.width - 40, height: 40))
         webSearchButton.backgroundColor = customPurple2
@@ -143,6 +143,10 @@ class PokemonInfoViewController: UIViewController {
         totalLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 500, width: view.frame.midX - 20, height: 30))
         totalLabel.text = "Total: \(total)"
         view.addSubview(totalLabel)
+    }
+    
+    @objc func addToFavorites() {
+        
     }
 
     

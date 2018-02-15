@@ -22,39 +22,56 @@ func tagToType(tagNumber:Int) -> String {
 }
 
 func getImageFromURL(imageUrl: String) -> UIImage {
-    var imageToDisplay = UIImage(named: "Pokedex")
-    //print(imageUrl)
-    if let url = URL(string: imageUrl) {
-        let session = URLSession(configuration: .default)
-        let downloadPicTask = session.dataTask(with: url) { (data, response, error) in
-            if let e = error {
-                print("Error downloading picture: \(e)")
-            } else {
-                //print("I'm downloading")
-                if let _ = response as? HTTPURLResponse {
-                    if let imageData = data {
-                        DispatchQueue.main.async {
-                            //print("I'm changing the image to: ")
-                            let pokemonImage = UIImage(data: imageData)
-    //                        print(pokemonImage!)
-                            imageToDisplay = pokemonImage
-                        }
-                    } else {
-                        print("Couldn't get image: Image is nil")
-                    }
-                } else {
-                    print("Couldn't get response code")
-                }
-            }
+    let url = URL(string: imageUrl)
+    if url != nil{
+        do {
+            let data = try Data(contentsOf: url!)
+            return UIImage(data: data)!
+            
         }
-        //print("I get here1")
-        downloadPicTask.resume()
+        catch _{
+            print("Error getting image")
+            return UIImage(named: "Pokedex")!
+        }
     }
+    else{
+        print("Broken URL")
+        return UIImage(named: "Pokedex")!
+    }
+}
+    
+            
+            
+//            if let e = error {
+//                print("Error downloading picture: \(e)")
+//            } else {
+//                //print("I'm downloading")
+//                if let _ = response as? HTTPURLResponse {
+//                    if let imageData = data {
+//                        //DispatchQueue.main.async {
+//                            //print("I'm changing the image to: ")
+//                            let pokemonImage = UIImage(data: imageData)
+//                            print("Pokemon image: \(pokemonImage!)")
+//                            imageToDisplay = pokemonImage
+//                            print(imageToDisplay!)
+//                        //}
+//                    } else {
+//                        print("Couldn't get image: Image is nil")
+//                    }
+//                } else {
+//                    print("Couldn't get response code")
+//                }
+//            }
+        //}
+        //print("I get here1")
+        //downloadPicTask.resume()
+    //}
     //print("I get here2")
     //print(imageToDisplay)
 //    print(imageToDisplay!)
-    return imageToDisplay!
-}
+//    print(imageToDisplay!)
+//    return imageToDisplay!
+//}
 
 
 class Pokemon {

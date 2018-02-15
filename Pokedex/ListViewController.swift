@@ -21,13 +21,22 @@ class ListViewController: UIViewController {
     var tableView: UITableView!
     var sc: UISegmentedControl!
     
-//var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
+    //var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
 //    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke")]
 //    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
     var filteredPokemonInfo = [Pokemon]()
     var filteredPokemon = [UIImage]()
     
+    
+    
     override func loadView() {
+        
+        filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
+        
+        filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
+        
+        print("Load Count: \(filteredPokemon.count)")
+        
         super.loadView()
         let items = ["Grid", "List"]
         sc = UISegmentedControl(items: items)
@@ -43,15 +52,15 @@ class ListViewController: UIViewController {
         
         self.view.addSubview(sc)
         
-        filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
-        for i in filteredPokemonInfo[0...10] {
-            print(i.name)
-            print(i.imageUrl)
-        }
+        //filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
+//        for i in filteredPokemonInfo[0...10] {
+//            print(i.name)
+//            print(i.imageUrl)
+//        }
         //print(filteredPokemonInfo[0].imageUrl)
-        filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
-        print("Filtered:" )
-        print(filteredPokemon)
+        
+//        print("Filtered:" )
+//        print(filteredPokemon)
 //        print(filteredPokemonInfo)
 //        print("IMAGES:")
 //        print(filteredPokemon)
@@ -150,6 +159,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     // specifying number of cells in the given section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        print(filteredPokemon.count)
         return filteredPokemon.count
 //        return 2
     }
@@ -166,7 +176,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // use this method to populate the data of a given cell
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pokeCell = cell as! PokemonCollectionViewCell
-        print(filteredPokemon[indexPath.row])
+        //print(filteredPokemon[indexPath.row])
         pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
     }
     
