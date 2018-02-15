@@ -108,7 +108,7 @@ class PokemonInfoViewController: UIViewController {
     func attributeSetup() {
         
         nameLabel = UILabel(frame: CGRect(x: 30, y: 340, width: view.frame.midX - 20, height: 30))
-        nameLabel.text = "Name: \(pokemonSelected!.name)"
+        nameLabel.text = "Name: \("pokemonSelected!.name")"
         view.addSubview(nameLabel)
         
         numberLabel = UILabel(frame: CGRect(x: 30, y: 380, width: view.frame.midX - 20, height: 30))

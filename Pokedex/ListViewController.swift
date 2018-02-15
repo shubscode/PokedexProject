@@ -23,6 +23,7 @@ class ListViewController: UIViewController {
     
     var filteredPokemonInfo = [Pokemon]()
     var filteredPokemon = [UIImage]()
+//    var thePokemon = Pokemon!
     
     
     
@@ -127,6 +128,7 @@ class ListViewController: UIViewController {
         
         tableView = UITableView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                 style: UITableViewStyle.plain)
+        tableView.register(PokemonCollectionViewCell.self, forCellReuseIdentifier: "poke")
         tableView.backgroundColor = UIColor.green
         
         view.addSubview(tableView)
@@ -197,6 +199,42 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 }
 
+//extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+//    
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+////        let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
+////            as!PokemonCollectionViewCell
+////        cell.awakeFromNib()
+////        cell.delegate = self
+////        return cell
+//    }
+//    
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return filteredPokemon.count
+//    }
+//    
+//
+////    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+////        <#code#>
+////    }
+////
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return 3
+//    }
+//    
+////    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+////        <#code#>
+////    }
+//    
+////    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+////        let cell = tableView.dequeueReusableCell(withIdentifier: "yourCell", for: indexPath)
+////        cell.textLabel?.text = "Cell at row \(indexPath.row)"
+////        return cell
+////    }
+//    
+//}
+    
+
 
 
 extension ListViewController: PokemonCollectionViewCellDelegate {
@@ -210,13 +248,19 @@ extension ListViewController: PokemonCollectionViewCellDelegate {
                 print("I WENT HERE !!!!!!!")
 
                 print(filteredPokemonInfo[0])
-                destinationVC.pokemonSelected = filteredPokemonInfo[0]
+//                destinationVC.pokemonSelected = filteredPokemonInfo[0]
                 //                print(filteredPokemonInfo[0])
             }
         }
     }
     
     func toProfile(forCell: PokemonCollectionViewCell) {
+//        for poke in filteredPokemonInfo {
+//            if (poke.name == ) {
+//                thePokemon = poke
+//            }
+//        }
+        
         self.performSegue(withIdentifier: "toProfile", sender: (Any).self)
     }
 }
