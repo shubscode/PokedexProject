@@ -24,6 +24,15 @@ func generateRandomPokemon() -> [Pokemon] {
     return randomPokemons
 }
 
+func getPokeName(pokeNumber: Int, pokeList: [Pokemon]) -> Pokemon? {
+    for pokemon in pokeList {
+        if pokemon.number == pokeNumber {
+            return pokemon
+        }
+    }
+    return nil
+}
+
 
 func tagToType(tagNumber:Int) -> String {
     return types[tagNumber]
