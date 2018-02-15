@@ -40,39 +40,6 @@ func getImageFromURL(imageUrl: String) -> UIImage {
     }
 }
     
-            
-            
-//            if let e = error {
-//                print("Error downloading picture: \(e)")
-//            } else {
-//                //print("I'm downloading")
-//                if let _ = response as? HTTPURLResponse {
-//                    if let imageData = data {
-//                        //DispatchQueue.main.async {
-//                            //print("I'm changing the image to: ")
-//                            let pokemonImage = UIImage(data: imageData)
-//                            print("Pokemon image: \(pokemonImage!)")
-//                            imageToDisplay = pokemonImage
-//                            print(imageToDisplay!)
-//                        //}
-//                    } else {
-//                        print("Couldn't get image: Image is nil")
-//                    }
-//                } else {
-//                    print("Couldn't get response code")
-//                }
-//            }
-        //}
-        //print("I get here1")
-        //downloadPicTask.resume()
-    //}
-    //print("I get here2")
-    //print(imageToDisplay)
-//    print(imageToDisplay!)
-//    print(imageToDisplay!)
-//    return imageToDisplay!
-//}
-
 
 class Pokemon {
     
