@@ -27,6 +27,8 @@ class ViewController: UIViewController {
     
     // Search Button
     var search: UIButton!
+    var randomSearch: UIButton!
+    var randomOrNot = false
     
     // ScrollView
     var scView:UIScrollView!
@@ -76,35 +78,42 @@ class ViewController: UIViewController {
         scView.contentSize = CGSize(width: xOffset, height: scView.frame.height)
         
         searchField = UITextField(frame: CGRect(x: 20, y: 190, width: view.frame.width - 40, height: 50))
-        searchField.placeholder = "Pokemon Name"
+        searchField.placeholder = "Pokémon Name"
         searchField.borderStyle = .roundedRect
         searchField.clipsToBounds = true
         view.addSubview(searchField)
         
-        minAtkTextField = UITextField(frame: CGRect(x: 20, y: 390, width: view.frame.width - 40, height: 50))
+        minAtkTextField = UITextField(frame: CGRect(x: 20, y: 340, width: view.frame.width - 40, height: 50))
         minAtkTextField.placeholder = "Minimum Attack Points"
         minAtkTextField.borderStyle = .roundedRect
         minAtkTextField.clipsToBounds = true
         view.addSubview(minAtkTextField)
         
-        minDefTextField = UITextField(frame: CGRect(x: 20, y: 470, width: view.frame.width - 40, height: 50))
+        minDefTextField = UITextField(frame: CGRect(x: 20, y: 420, width: view.frame.width - 40, height: 50))
         minDefTextField.placeholder = "Minimum Defense Points"
         minDefTextField.borderStyle = .roundedRect
         minDefTextField.clipsToBounds = true
         view.addSubview(minDefTextField)
         
-        minHpTextField = UITextField(frame: CGRect(x: 20, y: 550, width: view.frame.width - 40, height: 50))
+        minHpTextField = UITextField(frame: CGRect(x: 20, y: 500, width: view.frame.width - 40, height: 50))
         minHpTextField.placeholder = "Minimum Health Points"
         minHpTextField.borderStyle = .roundedRect
         minHpTextField.clipsToBounds = true
         view.addSubview(minHpTextField)
         
-        search = UIButton(frame: CGRect(x: 20, y: 630, width: view.frame.width - 40, height: 50))
+        search = UIButton(frame: CGRect(x: 20, y: 570, width: view.frame.width - 40, height: 50))
         search.backgroundColor = customPurple2
         search.layer.cornerRadius = 15
         search.setTitle("Search!", for: .normal)
         view.addSubview(search)
         search.addTarget(self, action: #selector(toSearch), for: .touchUpInside)
+        
+        randomSearch = UIButton(frame: CGRect(x: 20, y: 630, width: view.frame.width - 40, height: 50))
+        randomSearch.backgroundColor = customPurple2
+        randomSearch.layer.cornerRadius = 15
+        randomSearch.setTitle("Featured Pokémon", for: .normal)
+        view.addSubview(randomSearch)
+        randomSearch.addTarget(self, action: #selector(toSearch), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -168,22 +177,38 @@ class ViewController: UIViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toSearch" {
-            if let destinationVC = segue.destination as? ListViewController {
-                destinationVC.name = pokeName
-                destinationVC.pokeType = typesSelected
-                destinationVC.atk = minAtk
-                destinationVC.def = minDef
-                destinationVC.hp = minHp
+            if randomOrNot {
+                if let destinationVC = segue.destination as? ListViewController {
+                    var randomPokemons = generateRandomPokemon()
+                    destinationVC.filteredPokemonInfo = randomPokemons
+                    destinationVC.randomlyGenerated = true
+                }
+            }
+            else {
+                if let destinationVC = segue.destination as? ListViewController {
+                    destinationVC.name = pokeName
+                    destinationVC.pokeType = typesSelected
+                    destinationVC.atk = minAtk
+                    destinationVC.def = minDef
+                    destinationVC.hp = minHp
+                }
             }
         }
     }
     
-    @IBAction func toSearch (_ sender: Any) {
+    @objc func toSearch (_ sender: UIButton) {
+        if sender.titleLabel?.text == "Featured Pokémon" {
+            randomOrNot = true
+        }
         readInputs()
         self.performSegue(withIdentifier: "toSearch", sender: sender)
         
     }
     
+//    @objc func searchRandomly() {
+//
+//        self.performSegue(withIdentifier: "toSearch", sender: Any?.self)
+//    }
     @objc func typeSelect(sender: UIButton) {
         
         UIButton.animate(withDuration: 0.2,

@@ -15,6 +15,14 @@ var pokemonList = PokemonGenerator.getPokemonArray()
 
 var favoritePokemon = [Pokemon]()
 
+func generateRandomPokemon() -> [Pokemon] {
+    var randomPokemons = [Pokemon]()
+    for _ in 1...20 {
+        let randomIndex = Int(arc4random_uniform(UInt32(pokemonList.count))) - 1
+        randomPokemons.append(pokemonList[randomIndex])
+    }
+    return randomPokemons
+}
 
 
 func tagToType(tagNumber:Int) -> String {

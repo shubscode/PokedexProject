@@ -13,7 +13,7 @@ class PokemonInfoViewController: UIViewController {
     var pokemonImage: UIImage!
     var imageView: UIImageView!
     var rectangleView: UIImageView!
-    var pokemon: Pokemon!
+    var pokemonSelected: Pokemon?
     
     var nameLabel: UILabel!
     var numberLabel: UILabel!
@@ -26,12 +26,14 @@ class PokemonInfoViewController: UIViewController {
     var speedLabel: UILabel!
     var totalLabel: UILabel!
     
-//    var name: String!
+//    var pokemonSelected: Pokemon
+    
+//    var nameD: String!
 //    var number: Int!
 //    var attack: Int!
 //    var defense: Int!
 //    var health: Int!
-//   
+//
 //    var specialAttack: Int!
 //    var specialDefense: Int!
 //    var species: String!
@@ -54,7 +56,7 @@ class PokemonInfoViewController: UIViewController {
         super.viewDidLoad()
         
         imageView = UIImageView(frame: CGRect(x: 20, y: 80, width: view.bounds.width - 40, height: 240))
-        let pokeImage = getImageFromURL(imageUrl: pokemon.imageUrl)
+        let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
         imageView.image = pokeImage
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
@@ -107,46 +109,47 @@ class PokemonInfoViewController: UIViewController {
     func attributeSetup() {
         
         nameLabel = UILabel(frame: CGRect(x: 30, y: 340, width: view.frame.midX - 20, height: 30))
-        nameLabel.text = "Name: \(pokemon.name)"
+        nameLabel.text = "Name: \(pokemonSelected!.name)"
         view.addSubview(nameLabel)
         
         numberLabel = UILabel(frame: CGRect(x: 30, y: 380, width: view.frame.midX - 20, height: 30))
-        numberLabel.text = "Number: \(pokemon.number)"
+        numberLabel.text = "Number: \("x")"
         view.addSubview(numberLabel)
         
         attackLabel = UILabel(frame: CGRect(x: 30, y: 420, width: view.frame.midX - 20, height: 30))
-        attackLabel.text = "Attack: \(pokemon.attack)"
+        attackLabel.text = "Attack: \("x")"
         view.addSubview(attackLabel)
         
         defenseLabel = UILabel(frame: CGRect(x: 30, y: 460, width: view.frame.midX - 20, height: 30))
-        defenseLabel.text = "Defense: \(pokemon.defense)"
+        defenseLabel.text = "Defense: \("x")"
         view.addSubview(defenseLabel)
         
         healthLabel = UILabel(frame: CGRect(x: 30, y: 500, width: view.frame.midX - 20, height: 30))
-        healthLabel.text = "HP: \(pokemon.health)"
+        healthLabel.text = "HP: \("x")"
         view.addSubview(healthLabel)
         
         specialAttackLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 340, width: view.frame.midX - 20, height: 30))
-        specialAttackLabel.text = "Special Attack: \(pokemon.specialAttack)"
+        specialAttackLabel.text = "Special Attack: \("x")"
         view.addSubview(specialAttackLabel)
         
         specialDefenseLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 380, width: view.frame.midX - 20, height: 30))
-        specialDefenseLabel.text = "Special Defense: \(pokemon.specialDefense)"
+        specialDefenseLabel.text = "Special Defense: \("x")"
         view.addSubview(specialDefenseLabel)
         
         speciesLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 420, width: view.frame.midX - 20, height: 30))
-        speciesLabel.text = "Species: \(pokemon.species)"
+        speciesLabel.text = "Species: \("x")"
         view.addSubview(speciesLabel)
         
         speedLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 460, width: view.frame.midX - 20, height: 30))
-        speedLabel.text = "Speed: \(pokemon.speed)"
+        speedLabel.text = "Speed: \("x")"
         view.addSubview(speedLabel)
         
         totalLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 500, width: view.frame.midX - 20, height: 30))
-        totalLabel.text = "Total: \(pokemon.total)"
+        totalLabel.text = "Total: \("x")"
         view.addSubview(totalLabel)
     }
     
+
     @objc func addToFavorites(sender: UIButton) {
         UIButton.animate(withDuration: 0.2,
                          animations: {
@@ -158,12 +161,11 @@ class PokemonInfoViewController: UIViewController {
                             })
         })
         
-            favoritePokemon.append(pokemon)
-            let alert = UIAlertController(title: "Added To Favorites!", message: "\(pokemon.name) has been added to your favorites", preferredStyle: UIAlertControllerStyle.alert)
+            favoritePokemon.append(pokemonSelected!)
+        let alert = UIAlertController(title: "Added To Favorites!", message: "\(pokemonSelected?.name) has been added to your favorites", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
     }
-    
     
 
     
