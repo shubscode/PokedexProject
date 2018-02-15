@@ -33,7 +33,6 @@ func getPokeName(pokeNumber: Int, pokeList: [Pokemon]) -> Pokemon? {
     return nil
 }
 
-
 func tagToType(tagNumber:Int) -> String {
     return types[tagNumber]
 }

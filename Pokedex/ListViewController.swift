@@ -27,6 +27,8 @@ class ListViewController: UIViewController {
 
     var randomlyGenerated = false
     
+    var indexSelected: Int!
+    
     
     
     override func loadView() {
@@ -149,6 +151,7 @@ class ListViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
 
 }
 
@@ -172,7 +175,6 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "poke", for: indexPath)
             as!PokemonCollectionViewCell
         cell.awakeFromNib()
-        cell.delegate = self
         return cell
     }
     
@@ -241,7 +243,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
 
 
 
-extension ListViewController: PokemonCollectionViewCellDelegate {
+extension ListViewController{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         print("i went here")
@@ -258,16 +260,10 @@ extension ListViewController: PokemonCollectionViewCellDelegate {
         }
     }
     
-    func toProfile(forCell: PokemonCollectionViewCell) {
-//        for poke in filteredPokemonInfo {
-//            if (poke.name == ) {
-//                thePokemon = poke
-//            }
-//        }
-        
-//        thePokemon = getPokeName()
-        
-        self.performSegue(withIdentifier: "toProfile", sender: UIButton)
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        indexSelected = indexPath.row
+        print(indexSelected)
+        self.performSegue(withIdentifier: "toProfile", sender: self)
     }
     
 }
