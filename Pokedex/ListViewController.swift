@@ -114,8 +114,8 @@ class ListViewController: UIViewController {
         tableView.removeFromSuperview()
         
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 5
-        layout.minimumInteritemSpacing = 0
+//        layout.minimumLineSpacing = 15
+//        layout.minimumInteritemSpacing = 0
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
@@ -138,6 +138,17 @@ class ListViewController: UIViewController {
         tableView.backgroundColor = UIColor.green
         
         view.addSubview(tableView)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toProfile" {
+            let VC = segue.destination as! TabBarController
+            
+            print(filteredPokemonInfo[0])
+            VC.pokemonHolder = filteredPokemonInfo[indexSelected]
+//            VC.pokemonImgHolder = filteredPokemon[indexSelected]
+            
+        }
     }
     
     
@@ -183,12 +194,13 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let pokeCell = cell as! PokemonCollectionViewCell
         //print(filteredPokemon[indexPath.row])
         pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
+        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
     }
     
     // sets the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width/3, height:105)
+        return CGSize(width: view.frame.width/3, height:100)
         
         
 //        let padding: CGFloat =  50
@@ -203,6 +215,12 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //        <#code#>
 //    }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        indexSelected = indexPath.row
+        print(indexSelected)
+        self.performSegue(withIdentifier: "toProfile", sender: self)
+    }
+    
 }
 
 //extension ListViewController: UITableViewDelegate, UITableViewDataSource {
@@ -239,31 +257,3 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
 ////    }
 //    
 //}
-    
-
-
-
-extension ListViewController{
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("i went here")
-        if segue.identifier == "toProfile" {
-            print("I WENT HERE")
-
-            let destinationVC = segue.destination as! TabBarController
-            print("I WENT HERE !!!!!!!")
-
-            print(filteredPokemonInfo[0])
-            destinationVC.pokemonHolder = filteredPokemonInfo[0]
-                //                print(filteredPokemonInfo[0])
-            
-        }
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        indexSelected = indexPath.row
-        print(indexSelected)
-        self.performSegue(withIdentifier: "toProfile", sender: self)
-    }
-    
-}

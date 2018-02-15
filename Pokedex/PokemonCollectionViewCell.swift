@@ -15,7 +15,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         pokeImageView = UIImageView(frame: CGRect(x:20, y:15, width: 105, height:105))
-//        pokeImageView.contentMode = .scaleAspectFill
+        pokeImageView.contentMode = .scaleAspectFill
         pokeImageView.layer.cornerRadius = 10
         pokeImageView.clipsToBounds = true
         pokeImageView.layer.borderColor = UIColor.black.cgColor
@@ -29,7 +29,6 @@ class PokemonCollectionViewCell: UICollectionViewCell {
 //        contentView.addSubview(button)
         
         name = UILabel(frame: CGRect(x:2, y:98, width: 100, height:20))
-        name.text = "Pokemon"
         name.textColor = UIColor.gray
         name.shadowColor = UIColor.gray
         contentView.addSubview(name)

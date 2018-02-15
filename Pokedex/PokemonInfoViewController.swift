@@ -56,8 +56,8 @@ class PokemonInfoViewController: UIViewController {
         super.viewDidLoad()
         
         imageView = UIImageView(frame: CGRect(x: 20, y: 80, width: view.bounds.width - 40, height: 240))
-//        let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
-//        imageView.image = pokeImage
+        let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
+        imageView.image = pokeImage
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
         imageView.layer.cornerRadius = 10
@@ -109,43 +109,43 @@ class PokemonInfoViewController: UIViewController {
     func attributeSetup() {
         
         nameLabel = UILabel(frame: CGRect(x: 30, y: 340, width: view.frame.midX - 20, height: 30))
-        nameLabel.text = "Name: \("pokemonSelected!.name")"
+        nameLabel.text = "Name: \(pokemonSelected!.name!)"
         view.addSubview(nameLabel)
         
         numberLabel = UILabel(frame: CGRect(x: 30, y: 380, width: view.frame.midX - 20, height: 30))
-        numberLabel.text = "Number: \("x")"
+        numberLabel.text = "Number: \(pokemonSelected!.number!)"
         view.addSubview(numberLabel)
         
         attackLabel = UILabel(frame: CGRect(x: 30, y: 420, width: view.frame.midX - 20, height: 30))
-        attackLabel.text = "Attack: \("x")"
+        attackLabel.text = "Attack: \(pokemonSelected!.attack!)"
         view.addSubview(attackLabel)
         
         defenseLabel = UILabel(frame: CGRect(x: 30, y: 460, width: view.frame.midX - 20, height: 30))
-        defenseLabel.text = "Defense: \("x")"
+        defenseLabel.text = "Defense: \(pokemonSelected!.defense!)"
         view.addSubview(defenseLabel)
         
         healthLabel = UILabel(frame: CGRect(x: 30, y: 500, width: view.frame.midX - 20, height: 30))
-        healthLabel.text = "HP: \("x")"
+        healthLabel.text = "HP: \(pokemonSelected!.health!)"
         view.addSubview(healthLabel)
         
         specialAttackLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 340, width: view.frame.midX - 20, height: 30))
-        specialAttackLabel.text = "Special Attack: \("x")"
+        specialAttackLabel.text = "Special Attack: \(pokemonSelected!.specialAttack!)"
         view.addSubview(specialAttackLabel)
         
         specialDefenseLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 380, width: view.frame.midX - 20, height: 30))
-        specialDefenseLabel.text = "Special Defense: \("x")"
+        specialDefenseLabel.text = "Special Defense: \(pokemonSelected!.specialDefense!)"
         view.addSubview(specialDefenseLabel)
         
         speciesLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 420, width: view.frame.midX - 20, height: 30))
-        speciesLabel.text = "Species: \("x")"
+        speciesLabel.text = "Species: \(pokemonSelected!.species!)"
         view.addSubview(speciesLabel)
         
         speedLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 460, width: view.frame.midX - 20, height: 30))
-        speedLabel.text = "Speed: \("x")"
+        speedLabel.text = "Speed: \(pokemonSelected!.speed!)"
         view.addSubview(speedLabel)
         
         totalLabel = UILabel(frame: CGRect(x: view.frame.midX, y: 500, width: view.frame.midX - 20, height: 30))
-        totalLabel.text = "Total: \("x")"
+        totalLabel.text = "Total: \(pokemonSelected!.total!)"
         view.addSubview(totalLabel)
     }
     
