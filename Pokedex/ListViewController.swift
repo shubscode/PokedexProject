@@ -21,9 +21,6 @@ class ListViewController: UIViewController {
     var tableView: UITableView!
     var sc: UISegmentedControl!
     
-    //var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
-//    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke")]
-//    var filteredPokemon = [#imageLiteral(resourceName: "placeholderpoke"),#imageLiteral(resourceName: "placeholderpoke")]
     var filteredPokemonInfo = [Pokemon]()
     var filteredPokemon = [UIImage]()
     
@@ -197,11 +194,29 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
 //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
 //        <#code#>
 //    }
-    
+
 }
 
+
+
 extension ListViewController: PokemonCollectionViewCellDelegate {
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        print("i went here")
+        if segue.identifier == "toProfile" {
+            print("I WENT HERE")
+
+            if let destinationVC = segue.destination as? PokemonInfoViewController {
+                print("I WENT HERE !!!!!!!")
+
+                print(filteredPokemonInfo[0])
+                destinationVC.pokemonSelected = filteredPokemonInfo[0]
+                //                print(filteredPokemonInfo[0])
+            }
+        }
+    }
+    
     func toProfile(forCell: PokemonCollectionViewCell) {
-        self.performSegue(withIdentifier: "toProfile", sender: Any)
+        self.performSegue(withIdentifier: "toProfile", sender: (Any).self)
     }
 }
