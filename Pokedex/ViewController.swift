@@ -135,6 +135,8 @@ class ViewController: UIViewController {
     }
     
     func readInputs() {
+        print("READ INPUTS!")
+        print(minAtkTextField.text)
         if let name = searchField.text {
             pokeName = name
         }
@@ -145,6 +147,8 @@ class ViewController: UIViewController {
                 } else {
                     raiseInvalidTypeAlert(info: "Attack")
                 }
+            } else {
+                minAtk = 0
             }
         }
         if let defense = minDefTextField.text {
@@ -155,6 +159,9 @@ class ViewController: UIViewController {
                     raiseInvalidTypeAlert(info: "Defense")
                 }
             }
+            else {
+                minDef = 0
+            }
         }
         if let hp = minHpTextField.text {
             if hp != "" {
@@ -164,7 +171,9 @@ class ViewController: UIViewController {
                     raiseInvalidTypeAlert(info: "Hitpoint")
                 }
             }
-            
+            else {
+                minHp = 0
+            }
         }
     }
     
@@ -179,7 +188,7 @@ class ViewController: UIViewController {
         if segue.identifier == "toSearch" {
             if randomOrNot {
                 if let destinationVC = segue.destination as? ListViewController {
-                    var randomPokemons = generateRandomPokemon()
+                    let randomPokemons = generateRandomPokemon()
                     destinationVC.filteredPokemonInfo = randomPokemons
                     destinationVC.randomlyGenerated = true
                 }
