@@ -67,7 +67,7 @@ class ListViewController: UIViewController {
 //        print(filteredPokemon2[0].name)
         
         let layout = UICollectionViewFlowLayout()
-//        layout.minimumLineSpacing = 200
+        layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
@@ -159,7 +159,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
     // specifying number of cells in the given section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        print(filteredPokemon.count)
+//        print(filteredPokemon.count)
         return filteredPokemon.count
 //        return 2
     }
@@ -183,7 +183,8 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // sets the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 160, height:160)
+        return CGSize(width: 105, height:105)
+        
         
 //        let padding: CGFloat =  50
 //        let collectionViewSize = collectionView.frame.size.width - padding

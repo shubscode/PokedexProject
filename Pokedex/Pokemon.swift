@@ -31,12 +31,12 @@ func getImageFromURL(imageUrl: String) -> UIImage {
         }
         catch _{
             print("Error getting image")
-            return UIImage(named: "Pokedex")!
+            return UIImage(named: "error")!
         }
     }
     else{
         print("Broken URL")
-        return UIImage(named: "Pokedex")!
+        return UIImage(named: "error")!
     }
 }
     
