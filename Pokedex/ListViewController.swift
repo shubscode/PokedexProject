@@ -18,6 +18,7 @@ class ListViewController: UIViewController {
     var hp: Int?
     
     var collectionView: UICollectionView!
+    var UI: UICollectionView!
     var tableView: UITableView!
     var sc: UISegmentedControl!
     
@@ -56,7 +57,7 @@ class ListViewController: UIViewController {
         backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0)
         self.view.tintColor = UIColor.black
-        self.view.
+//        self.view.
         
 //        self.view.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.12)
 
@@ -78,6 +79,12 @@ class ListViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 25
         layout.minimumInteritemSpacing = 0
+        
+        UI = UICollectionView(frame: CGRect(x: 0, y:0, width: view.frame.width, height: 135),
+                              collectionViewLayout: layout)
+//        UI.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
+        UI.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.22)
+        
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
@@ -86,6 +93,7 @@ class ListViewController: UIViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         
+        view.addSubview(UI)
         view.addSubview(collectionView)
         view.addSubview(sc)
         // Do any additional setup after loading the view.
