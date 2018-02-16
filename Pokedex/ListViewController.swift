@@ -117,7 +117,7 @@ class ListViewController: UIViewController {
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.22)
         collectionView.clipsToBounds = true
         
         collectionView.delegate = self
@@ -135,7 +135,7 @@ class ListViewController: UIViewController {
         tableView = UITableView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                 style: UITableViewStyle.plain)
         tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "poke")
-        tableView.backgroundColor = UIColor.white
+        tableView.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.22)
         tableView.clipsToBounds = true
         
         tableView.delegate = self
@@ -244,6 +244,7 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let image = filteredPokemonInfo[indexPath.row].getImageFromURL()
         cell.pokeImageView.image = image
         cell.name.text = filteredPokemonInfo[indexPath.row].name
+        cell.number = filteredPokemonInfo[indexPath.row].number!
         return cell
     }
     

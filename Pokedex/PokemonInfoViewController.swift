@@ -93,16 +93,16 @@ class PokemonInfoViewController: UIViewController {
         favoriteButton = UIButton(frame: CGRect(x: 20, y: 560, width: view.frame.width - 40, height: 40))
         favoriteButton.backgroundColor = customPurple2
         favoriteButton.layer.cornerRadius = 15
-        favoriteButton.setTitle("Add To Favorites!", for: .normal)
+        favoriteButton.setTitle("Favorite", for: .normal)
         view.addSubview(favoriteButton)
         favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         
         webSearchButton = UIButton(frame: CGRect(x: 20, y: 620, width: view.frame.width - 40, height: 40))
         webSearchButton.backgroundColor = customPurple2
         webSearchButton.layer.cornerRadius = 15
-        webSearchButton.setTitle("Search the Web!", for: .normal)
+        webSearchButton.setTitle("See More", for: .normal)
         view.addSubview(webSearchButton)
-        //search.addTarget(self, action: #selector(toSearch), for: .touchUpInside)
+        webSearchButton.addTarget(self, action: #selector(toSearch), for: .touchUpInside)
         
         
     }
@@ -169,7 +169,11 @@ class PokemonInfoViewController: UIViewController {
     
 
     
-    
+    func toSearch() {
+        let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
+        webView.loadRequest(NSURLRequest(url: NSURL(string: "https://google.com/search?q=\(pokemonSelected!.name!)")! as URL) as URLRequest)
+        view.addSubview(webView)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

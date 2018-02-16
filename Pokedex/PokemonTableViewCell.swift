@@ -12,10 +12,11 @@ class PokemonTableViewCell: UITableViewCell {
     var pokeImageView: UIImageView!
     var button: UIButton!
     var name: UILabel!
+    var num: UILabel!
+    var number: Int!
     
     override func awakeFromNib() {
         pokeImageView = UIImageView(frame: CGRect(x:20, y:15, width: 77, height:77))
-        pokeImageView.contentMode = .scaleAspectFill
         pokeImageView.layer.cornerRadius = 10
         pokeImageView.clipsToBounds = true
         pokeImageView.layer.borderColor = UIColor.black.cgColor
@@ -28,9 +29,14 @@ class PokemonTableViewCell: UITableViewCell {
         //        button.addTarget(self, action: #selector(toProfile), for: .touchUpInside)
         //        contentView.addSubview(button)
         
-        name = UILabel(frame: CGRect(x:2, y:98, width: 100, height:20))
-        name.textColor = UIColor.gray
-        name.shadowColor = UIColor.gray
+        name = UILabel(frame: CGRect(x:125, y:25, width: 200, height:30))
+        name.textColor = UIColor.black
+        name.font = UIFont.boldSystemFont(ofSize: 25)
         contentView.addSubview(name)
+        
+        num = UILabel(frame: CGRect(x:125, y:55, width: 200, height:30))
+        num.text = "Call me: \(number)"
+        num.textColor = UIColor.darkGray
+        contentView.addSubview(num)
     }
 }
