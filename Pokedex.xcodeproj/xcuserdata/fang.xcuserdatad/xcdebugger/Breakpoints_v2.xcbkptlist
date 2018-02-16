@@ -10,11 +10,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Pokedex/ListViewController.swift"
-            timestampString = "540434148.9295321"
+            timestampString = "540434365.055548"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
+            startingLineNumber = "115"
+            endingLineNumber = "115"
             landmarkName = "makeList()"
             landmarkType = "7">
          </BreakpointContent>
