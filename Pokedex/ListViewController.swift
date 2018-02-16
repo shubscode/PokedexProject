@@ -55,20 +55,6 @@ class ListViewController: UIViewController {
         
         self.view.addSubview(sc)
         
-        //filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
-//        for i in filteredPokemonInfo[0...10] {
-//            print(i.name)
-//            print(i.imageUrl)
-//        }
-        //print(filteredPokemonInfo[0].imageUrl)
-        
-//        print("Filtered:" )
-//        print(filteredPokemon)
-//        print(filteredPokemonInfo)
-//        print("IMAGES:")
-//        print(filteredPokemon)
-//        print(filteredPokemon2[0].name)
-        
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 0
         layout.minimumInteritemSpacing = 0
@@ -117,8 +103,8 @@ class ListViewController: UIViewController {
         tableView.removeFromSuperview()
         
         let layout = UICollectionViewFlowLayout()
-//        layout.minimumLineSpacing = 15
-//        layout.minimumInteritemSpacing = 0
+        layout.minimumLineSpacing = 0
+        layout.minimumInteritemSpacing = 0
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
@@ -201,26 +187,23 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.awakeFromNib()
         
         cell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
-//        print("tried to get image")
         cell.name.text = filteredPokemonInfo[indexPath.row].name
-        //cell.pokeImageView.image =
         return cell
     }
     
-    // use this method to populate the data of a given cell
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        let pokeCell = cell as! PokemonCollectionViewCell
-        //print(filteredPokemon[indexPath.row])
-        //pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
-//        pokeCell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
-//        print("tried to get image")
-//        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
-//        print("assigned name")
-    }
+//    // use this method to populate the data of a given cell
+//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+//        let pokeCell = cell as! PokemonCollectionViewCell
+//        //print(filteredPokemon[indexPath.row])
+//        //pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
+////        pokeCell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
+////        print("tried to get image")
+////        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
+////        print("assigned name")
+//    }
     
     // sets the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         return CGSize(width: view.frame.width/3, height:100)
         
     }
@@ -254,20 +237,12 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
             as! PokemonTableViewCell
-        
         cell.awakeFromNib()
-
-        
-//        for sv in cell.contentView.subviews {
-//            sv.removefromSuperview()
-//        }
         
         var image = filteredPokemonInfo[indexPath.row].getImageFromURL()
         print(image)
         cell.pokeImageView.image = image
         cell.name.text = filteredPokemonInfo[indexPath.row].name
-
-        print("I added images to tableview")
         return cell
     }
     
