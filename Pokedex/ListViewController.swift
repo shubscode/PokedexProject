@@ -129,25 +129,9 @@ class ListViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
             let VC = segue.destination as! TabBarController
-            
             VC.pokemonHolder = filteredPokemonInfo[indexSelected]
-            
         }
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-    
-
 }
 
 
@@ -156,7 +140,8 @@ class ListViewController: UIViewController {
 /***********************************************************************************************************/
 
 
-extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource,
+UICollectionViewDelegateFlowLayout{
     
     // specifying number of sections in the CV
     func numberOfSections(in collectionView: UICollectionView) -> Int {
