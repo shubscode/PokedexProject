@@ -224,12 +224,11 @@ class ViewController: UIViewController {
                     print("i came hee")
                     pok = [poke]
                     self.performSegue(withIdentifier: "fastTrack", sender: sender)
-                    break
+                    return
                 }
             }
-        } else {
-            self.performSegue(withIdentifier: "toSearch", sender: sender)
         }
+        self.performSegue(withIdentifier: "toSearch", sender: sender)
     }
     
 //    @objc func searchRandomly() {
