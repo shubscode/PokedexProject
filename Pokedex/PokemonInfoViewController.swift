@@ -55,6 +55,8 @@ class PokemonInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+         //self.tabBarController?.tabBar.items![0].image = UIImage(named: "profileIcon")
+        
         imageView = UIImageView(frame: CGRect(x: 20, y: 100, width: view.bounds.width - 38, height: 200))
         let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
         imageView.image = pokeImage
@@ -93,7 +95,7 @@ class PokemonInfoViewController: UIViewController {
         favoriteButton = UIButton(frame: CGRect(x: 20, y: 560, width: view.frame.width - 40, height: 40))
         favoriteButton.backgroundColor = customPurple2
         favoriteButton.layer.cornerRadius = 15
-        favoriteButton.setTitle("Favorite", for: .normal)
+        favoriteButton.setTitle("Add to Favorites", for: .normal)
         view.addSubview(favoriteButton)
         favoriteButton.addTarget(self, action: #selector(addToFavorites), for: .touchUpInside)
         
@@ -175,10 +177,7 @@ class PokemonInfoViewController: UIViewController {
         view.addSubview(webView)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+
     
 
     /*

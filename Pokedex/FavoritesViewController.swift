@@ -26,6 +26,12 @@ class FavoritesViewController: UIViewController {
         titleLabel.textAlignment = .center
         view.addSubview(titleLabel)
         
+       
+        super.viewDidLoad()
+
+        // Do any additional setup after loading the view.
+    }
+    override func viewDidAppear(_ animated: Bool) {
         tableView = UITableView(frame: CGRect(x: 30, y:160, width: view.frame.width - 60, height: view.frame.height),
                                 style: UITableViewStyle.plain)
         tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "poke")
@@ -36,9 +42,7 @@ class FavoritesViewController: UIViewController {
         tableView.dataSource = self
         
         view.addSubview(tableView)
-        super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        super.viewDidAppear(true);
     }
     
     override func loadView() {
