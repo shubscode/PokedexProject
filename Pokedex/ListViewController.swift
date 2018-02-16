@@ -24,6 +24,8 @@ class ListViewController: UIViewController {
     
     var filteredPokemonInfo = [Pokemon]()
     var thePokemon: Pokemon!
+    
+    var emptyImage: UIImageView!
 
     var randomlyGenerated = false
     
@@ -49,6 +51,12 @@ class ListViewController: UIViewController {
         }
         
         print("Load Count: \(filteredPokemonInfo.count)")
+        if (filteredPokemonInfo.count == 0) {
+            raiseInvalidTypeAlert()
+//            emptyImage = UIImageView(frame: CGRect(x: 25, y:80, width: view.frame.width-50, height: 40))
+//            emptyImage.image = #imageLiteral(resourceName: "placeholderpoke")
+//            contentsView.addSubview(emptyImage)
+        }
         
         super.loadView()
         
@@ -151,6 +159,14 @@ class ListViewController: UIViewController {
             VC.pokemonHolder = filteredPokemonInfo[indexSelected]
         }
     }
+
+    func raiseInvalidTypeAlert() {
+        let alert = UIAlertController(title: "No Pokemons Found ):", message: nil, preferredStyle: UIAlertControllerStyle.alert)
+        alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+
 }
 
 
