@@ -14,8 +14,8 @@ class FavoritesTableViewCell: UITableViewCell {
     var name: UILabel!
     
     override func awakeFromNib() {
-        pokeImageView = UIImageView(frame: CGRect(x:20, y:15, width: 77, height:77))
-        pokeImageView.contentMode = .scaleAspectFill
+        pokeImageView = UIImageView(frame: CGRect(x:120, y:15, width: 77, height:77))
+        pokeImageView.contentMode = .scaleAspectFit
         pokeImageView.layer.cornerRadius = 10
         pokeImageView.clipsToBounds = true
         pokeImageView.layer.borderColor = UIColor.black.cgColor
@@ -28,7 +28,7 @@ class FavoritesTableViewCell: UITableViewCell {
         //        button.addTarget(self, action: #selector(toProfile), for: .touchUpInside)
         //        contentView.addSubview(button)
         
-        name = UILabel(frame: CGRect(x:2, y:98, width: 100, height:20))
+        name = UILabel(frame: CGRect(x:20, y:80, width: 120, height:40))
         name.textColor = UIColor.gray
         name.shadowColor = UIColor.gray
         contentView.addSubview(name)

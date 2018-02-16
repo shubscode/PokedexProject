@@ -11,11 +11,48 @@ import UIKit
 class FavoritesViewController: UIViewController {
     
     var tableView: UITableView!
+    var titleLabel: UILabel!
+
+    var customPurple2 =  UIColor(red: 0.5176, green: 0.4392, blue: 0.9569, alpha: 1.0)
 
     override func viewDidLoad() {
+        
+        //view.backgroundColor = .purple
+        
+        titleLabel = UILabel(frame: CGRect(x: 0, y: 50, width: view.bounds.width, height: 120))
+        titleLabel.text = "My Favorites"
+        titleLabel.font = titleLabel.font.withSize(60)
+        titleLabel.textColor = customPurple2
+        titleLabel.textAlignment = .center
+        view.addSubview(titleLabel)
+        
+        tableView = UITableView(frame: CGRect(x: 30, y:160, width: view.frame.width - 60, height: view.frame.height),
+                                style: UITableViewStyle.plain)
+        tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "poke")
+        tableView.backgroundColor = UIColor.white
+        tableView.clipsToBounds = true
+        
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+        view.addSubview(tableView)
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+    }
+    
+    override func loadView() {
+        view = UIView()
+        view.frame = UIScreen.main.bounds
+        setBackground()
+    }
+    
+    func setBackground() {
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "pokeBackground.png")
+        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
     }
 
     override func didReceiveMemoryWarning() {
