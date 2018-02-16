@@ -153,6 +153,7 @@ class PokemonInfoViewController: UIViewController {
     
 
     @objc func addToFavorites(sender: UIButton) {
+        var notDuplicate = true
         UIButton.animate(withDuration: 0.2,
                          animations: {
                             sender.transform = CGAffineTransform(scaleX: 0.975, y: 0.96)
@@ -162,11 +163,21 @@ class PokemonInfoViewController: UIViewController {
                                 sender.transform = CGAffineTransform.identity
                             })
         })
-        
+        for poke in favoritePokemon {
+            if poke.name == pokemonSelected!.name {
+                notDuplicate = false
+                let alert = UIAlertController(title: "Duplicate Entry!", message: "\(pokemonSelected!.name!) is already in your favorites!", preferredStyle: UIAlertControllerStyle.alert)
+                alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+        if notDuplicate {
             favoritePokemon.append(pokemonSelected!)
-        let alert = UIAlertController(title: "Added To Favorites!", message: "\(pokemonSelected!.name!) has been added to your favorites", preferredStyle: UIAlertControllerStyle.alert)
+            let alert = UIAlertController(title: "Added To Favorites!", message: "\(pokemonSelected!.name!) has been added to your favorites", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+        }
+        
     }
     
 
