@@ -77,7 +77,7 @@ class ViewController: UIViewController {
         scView.contentSize = CGSize(width: xOffset, height: scView.frame.height)
         
         searchField = UITextField(frame: CGRect(x: 20, y: 190, width: view.frame.width - 40, height: 50))
-        searchField.placeholder = "Pokémon Name"
+        searchField.placeholder = "Pokémon Name/Number"
         searchField.borderStyle = .roundedRect
         searchField.clipsToBounds = true
         view.addSubview(searchField)

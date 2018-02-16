@@ -55,7 +55,7 @@ class PokemonInfoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        imageView = UIImageView(frame: CGRect(x: 20, y: 80, width: view.bounds.width - 40, height: 240))
+        imageView = UIImageView(frame: CGRect(x: 20, y: 100, width: view.bounds.width - 38, height: 200))
         let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
         imageView.image = pokeImage
         imageView.contentMode = .scaleAspectFit

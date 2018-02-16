@@ -50,6 +50,17 @@ class ListViewController: UIViewController {
         print("Load Count: \(filteredPokemonInfo.count)")
         
         super.loadView()
+        
+        let backgroundImage = UIImageView(frame: UIScreen.main.bounds)
+        backgroundImage.image = UIImage(named: "lpurple-1.jpg")
+        backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
+        self.view.insertSubview(backgroundImage, at: 0)
+        self.view.tintColor = UIColor.black
+        self.view.
+        
+//        self.view.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.12)
+
+
         let items = ["Grid", "List"]
         sc = UISegmentedControl(items: items)
         sc.selectedSegmentIndex = 0
@@ -57,7 +68,7 @@ class ListViewController: UIViewController {
         sc.frame = CGRect(x: 25, y:80, width: view.frame.width-50, height: 40)
         
         sc.layer.cornerRadius = 5.0
-        sc.backgroundColor = UIColor.black
+        sc.backgroundColor = UIColor.darkGray
         sc.tintColor = UIColor.white
         
         sc.addTarget(self, action: #selector(changeView), for: .valueChanged)
@@ -67,10 +78,10 @@ class ListViewController: UIViewController {
         let layout = UICollectionViewFlowLayout()
         layout.minimumLineSpacing = 25
         layout.minimumInteritemSpacing = 0
-        collectionView = UICollectionView(frame: CGRect(x: 12, y:135, width: view.frame.width, height: view.frame.height-135),
+        collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                           collectionViewLayout: layout)
         collectionView.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
-        collectionView.backgroundColor = UIColor.white
+        collectionView.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.22)
         
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -157,6 +168,11 @@ UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "poke", for: indexPath)
             as!PokemonCollectionViewCell
+        
+        for subview in cell.contentView.subviews {
+            subview.removeFromSuperview()
+        }
+        
         cell.awakeFromNib()
         
         cell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
@@ -210,9 +226,14 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
             as! PokemonTableViewCell
+        
+        for subview in cell.contentView.subviews {
+            subview.removeFromSuperview()
+        }
+        
         cell.awakeFromNib()
         
-        var image = filteredPokemonInfo[indexPath.row].getImageFromURL()
+        let image = filteredPokemonInfo[indexPath.row].getImageFromURL()
         cell.pokeImageView.image = image
         cell.name.text = filteredPokemonInfo[indexPath.row].name
         return cell
