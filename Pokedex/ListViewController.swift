@@ -188,7 +188,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.awakeFromNib()
         
         cell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
-        print("tried to get image")
+        //print("tried to get image")
         cell.name.text = filteredPokemonInfo[indexPath.row].name
         //cell.pokeImageView.image =
         return cell

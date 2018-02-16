@@ -162,7 +162,7 @@ class PokemonInfoViewController: UIViewController {
         })
         
             favoritePokemon.append(pokemonSelected!)
-        let alert = UIAlertController(title: "Added To Favorites!", message: "\(pokemonSelected?.name) has been added to your favorites", preferredStyle: UIAlertControllerStyle.alert)
+        let alert = UIAlertController(title: "Added To Favorites!", message: "\(pokemonSelected!.name!) has been added to your favorites", preferredStyle: UIAlertControllerStyle.alert)
             alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
     }
