@@ -38,6 +38,10 @@ class ViewController: UIViewController {
     
     var customPurple = UIColor(red: 0.6863, green: 0.2902, blue: 0.698, alpha: 1.0)
     var customPurple2 =  UIColor(red: 0.5176, green: 0.4392, blue: 0.9569, alpha: 1.0)
+    
+    // pokemon list
+    var pokemonList = PokemonGenerator.getPokemonArray()
+    var pok = [Pokemon]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -202,6 +206,11 @@ class ViewController: UIViewController {
                 }
             }
         }
+        
+        if segue.identifier == "fastTrack" {
+            let VC = segue.destination as! TabBarController
+            VC.pokemonHolder = pok[0]
+        }
     }
     
     @objc func toSearch (_ sender: UIButton) {
@@ -210,8 +219,14 @@ class ViewController: UIViewController {
         } else {
             randomOrNot = false
         }
-    
         readInputs()
+        for poke in pokemonList {
+            if pokeName == poke.name {
+                print("i came hee")
+                pok = [poke]
+                self.performSegue(withIdentifier: "fastTrack", sender: sender)
+            }
+        }
         self.performSegue(withIdentifier: "toSearch", sender: sender)
         
     }

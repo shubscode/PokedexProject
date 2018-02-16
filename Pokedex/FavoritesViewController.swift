@@ -95,12 +95,10 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         //            sv.removefromSuperview()
         //        }
         
-        var image = favoritePokemon[indexPath.row].getImageFromURL()
+        let image = favoritePokemon[indexPath.row].getImageFromURL()
         print(image)
         cell.pokeImageView.image = image
         cell.name.text = favoritePokemon[indexPath.row].name
-        
-        print("I added images to tableview")
         return cell
     }
     

@@ -25,6 +25,7 @@
                     <navigationItem key="navigationItem" id="e1V-ZY-Z3b"/>
                     <connections>
                         <segue destination="Tmb-8M-RoD" kind="show" identifier="toSearch" id="dvi-8H-EvB"/>
+                        <segue destination="HeM-9x-h5E" kind="show" identifier="fastTrack" id="ueR-hl-BPc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -68,7 +69,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mAf-8R-D8E" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1540" y="33"/>
+            <point key="canvasLocation" x="1700" y="33"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="0Zm-ya-v2T">
@@ -89,4 +90,7 @@
             <point key="canvasLocation" x="-841" y="33"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Vdm-F6-8xy"/>
+    </inferredMetricsTieBreakers>
 </document>
