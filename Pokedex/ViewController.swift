@@ -138,8 +138,6 @@ class ViewController: UIViewController {
     }
     
     func readInputs() {
-        print("READ INPUTS!")
-        print(minAtkTextField.text)
         if let name = searchField.text {
             pokeName = name
         }
@@ -220,15 +218,18 @@ class ViewController: UIViewController {
             randomOrNot = false
         }
         readInputs()
-        for poke in pokemonList {
-            if pokeName == poke.name {
-                print("i came hee")
-                pok = [poke]
-                self.performSegue(withIdentifier: "fastTrack", sender: sender)
+        if minAtk == 0 && minDef == 0 && minHp == 0 {
+            for poke in pokemonList {
+                if pokeName == poke.name || Int(pokeName) == poke.number {
+                    print("i came hee")
+                    pok = [poke]
+                    self.performSegue(withIdentifier: "fastTrack", sender: sender)
+                    break
+                }
             }
+        } else {
+            self.performSegue(withIdentifier: "toSearch", sender: sender)
         }
-        self.performSegue(withIdentifier: "toSearch", sender: sender)
-        
     }
     
 //    @objc func searchRandomly() {
