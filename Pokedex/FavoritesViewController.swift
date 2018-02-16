@@ -33,3 +33,46 @@ class FavoritesViewController: UIViewController {
     */
 
 }
+
+extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // specifying number of sections in the CV
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return favoritePokemon.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
+            as! PokemonTableViewCell
+        
+        cell.awakeFromNib()
+        
+        
+        //        for sv in cell.contentView.subviews {
+        //            sv.removefromSuperview()
+        //        }
+        
+        var image = favoritePokemon[indexPath.row].getImageFromURL()
+        print(image)
+        cell.pokeImageView.image = image
+        cell.name.text = favoritePokemon[indexPath.row].name
+        
+        print("I added images to tableview")
+        return cell
+    }
+    
+    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+    //        let pokeCell = cell as! PokemonTableViewCell
+    //        pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
+    //        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
+    //    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}

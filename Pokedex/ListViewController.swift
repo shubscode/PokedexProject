@@ -109,7 +109,10 @@ class ListViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    // set up collectionView
+
+    /***********************************************************************************************************/
+    /************************************* SETS UP COLLECTION VIEW *********************************************/
+    /***********************************************************************************************************/
     func makeGrid() {
         tableView.removeFromSuperview()
         
@@ -128,25 +131,32 @@ class ListViewController: UIViewController {
         view.addSubview(collectionView)
     }
     
-    // renders tableView
+    /***********************************************************************************************************/
+    /****************************************** SETS UP TABLE VIEW *********************************************/
+    /***********************************************************************************************************/
     func makeList() {
         collectionView.removeFromSuperview()
         
         tableView = UITableView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                 style: UITableViewStyle.plain)
-        tableView.register(PokemonCollectionViewCell.self, forCellReuseIdentifier: "poke")
-        tableView.backgroundColor = UIColor.green
+        tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "poke")
+        collectionView.backgroundColor = UIColor.white
+        collectionView.clipsToBounds = true
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         view.addSubview(tableView)
+        print("I made a table")
+
     }
-    
+    /***********************************************************************************************************/
+
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "toProfile" {
             let VC = segue.destination as! TabBarController
             
-            print(filteredPokemonInfo[0])
             VC.pokemonHolder = filteredPokemonInfo[indexSelected]
-//            VC.pokemonImgHolder = filteredPokemon[indexSelected]
             
         }
     }
@@ -166,19 +176,22 @@ class ListViewController: UIViewController {
 
 }
 
+
+/***********************************************************************************************************/
+/********************************************* COLLECTION VIEW *********************************************/
+/***********************************************************************************************************/
+
+
 extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     
     // specifying number of sections in the CV
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
-//        return filteredPokemon.count/2
     }
     
     // specifying number of cells in the given section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        print(filteredPokemon.count)
         return filteredPokemonInfo.count
-//        return 2
     }
     
     // use this method to dequeue the cell and set it up
@@ -188,7 +201,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         cell.awakeFromNib()
         
         cell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
-        //print("tried to get image")
+
         cell.name.text = filteredPokemonInfo[indexPath.row].name
         //cell.pokeImageView.image =
         return cell
@@ -210,18 +223,8 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         
         return CGSize(width: view.frame.width/3, height:100)
         
-        
-//        let padding: CGFloat =  50
-//        let collectionViewSize = collectionView.frame.size.width - padding
-//
-//        return CGSize(width: collectionViewSize/2, height: collectionViewSize/2)
-        
     }
     
-//    // if we want something to happen when user taps a cell, use this method
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        <#code#>
-//    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         indexSelected = indexPath.row
@@ -231,37 +234,88 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-//extension ListViewController: UITableViewDelegate, UITableViewDataSource {
-//    
+
+/***********************************************************************************************************/
+/********************************************* TABLE VIEW *********************************************/
+/***********************************************************************************************************/
+
+
+extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // specifying number of sections in the CV
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredPokemonInfo.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
+            as! PokemonTableViewCell
+        
+        cell.awakeFromNib()
+
+        
+//        for sv in cell.contentView.subviews {
+//            sv.removefromSuperview()
+//        }
+        
+        var image = filteredPokemonInfo[indexPath.row].getImageFromURL()
+        print(image)
+        cell.pokeImageView.image = image
+        cell.name.text = filteredPokemonInfo[indexPath.row].name
+
+        print("I added images to tableview")
+        return cell
+    }
+    
+//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+//        let pokeCell = cell as! PokemonTableViewCell
+//        pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
+//        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
+//    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexSelected = indexPath.row
+        print(indexSelected)
+        self.performSegue(withIdentifier: "toProfile", sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}
+
+//extension PokemonViewController: UITableViewDataSource, UITableViewDelegate {
+
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-////        let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
-////            as!PokemonCollectionViewCell
-////        cell.awakeFromNib()
-////        cell.delegate = self
-////        return cell
-//    }
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return filteredPokemon.count
-//    }
-//    
 //
-////    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-////        <#code#>
-////    }
-////
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 3
+//        cell.awakeFromNib()
+//        cell.nameLabel.text = pokemonResults[indexPath.row].name
+//        if let pokemonPictureURL = URL(string: pokemonResults[indexPath.row].imageUrl) {
+//            let data = try? Data(contentsOf: pokemonPictureURL)
+//
+//            if data != nil{
+//
+//                cell.cellImg.image = UIImage(data: data!)
+//            }
+//
+//        } else {
+//            cell.cellImg.image = #imageLiteral(resourceName: "images")
+//        }
+//        return cell
 //    }
-//    
-////    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-////        <#code#>
-////    }
-//    
-////    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-////        let cell = tableView.dequeueReusableCell(withIdentifier: "yourCell", for: indexPath)
-////        cell.textLabel?.text = "Cell at row \(indexPath.row)"
-////        return cell
-////    }
-//    
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        pokemonToPass = pokemonResults[indexPath.row]
+//        performSegue(withIdentifier: "segueToPokemonProfile", sender: self)
+//    }
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 50
+//    }
+
 //}
+
