@@ -235,35 +235,3 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         return 100
     }
 }
-
-//extension PokemonViewController: UITableViewDataSource, UITableViewDelegate {
-
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//        cell.awakeFromNib()
-//        cell.nameLabel.text = pokemonResults[indexPath.row].name
-//        if let pokemonPictureURL = URL(string: pokemonResults[indexPath.row].imageUrl) {
-//            let data = try? Data(contentsOf: pokemonPictureURL)
-//
-//            if data != nil{
-//
-//                cell.cellImg.image = UIImage(data: data!)
-//            }
-//
-//        } else {
-//            cell.cellImg.image = #imageLiteral(resourceName: "images")
-//        }
-//        return cell
-//    }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        pokemonToPass = pokemonResults[indexPath.row]
-//        performSegue(withIdentifier: "segueToPokemonProfile", sender: self)
-//    }
-
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        return 50
-//    }
-
-//}
-
