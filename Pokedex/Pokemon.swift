@@ -102,4 +102,24 @@ class Pokemon {
         self.imageUrl = "http://img.pokemondb.net/artwork/\(name.components(separatedBy: " ")[0].lowercased()).jpg"
     }
     
+    func getImageFromURL() -> UIImage {
+        let url = URL(string: self.imageUrl)
+        if url != nil{
+            do {
+                let data = try Data(contentsOf: url!)
+                return UIImage(data: data)!
+                
+            }
+            catch _{
+                print("Error getting image")
+                return UIImage(named: "error")!
+            }
+        }
+        else{
+            print("Broken URL")
+            return UIImage(named: "error")!
+        }
+    }
+    
+    
 }
