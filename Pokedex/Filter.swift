@@ -29,7 +29,16 @@ func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef:
     var filtered = pokemonList
     //assignVals(name: name, typeFilter: typeFilter, minAtk: minAtk, minDef: minDef, minHP: minHP)
     if let filterName = name {
-        if filterName != "" {
+        if (Int(filterName) != nil) {
+            for pokemon in filtered {
+                if pokemon.number != Int(filterName) {
+                    let index = filtered.index(where: { (poke) -> Bool in
+                        poke.name == pokemon.name
+                    })
+                    filtered.remove(at: index!)
+                }
+            }
+        } else if filterName != "" {
             for pokemon in filtered {
                 if pokemon.name != filterName {
                     let index = filtered.index(where: { (poke) -> Bool in

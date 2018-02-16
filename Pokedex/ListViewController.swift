@@ -214,7 +214,6 @@ UICollectionViewDelegateFlowLayout{
     
 }
 
-
 /***********************************************************************************************************/
 /********************************************* TABLE VIEW *********************************************/
 /***********************************************************************************************************/
@@ -244,7 +243,8 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         let image = filteredPokemonInfo[indexPath.row].getImageFromURL()
         cell.pokeImageView.image = image
         cell.name.text = filteredPokemonInfo[indexPath.row].name
-        cell.number = filteredPokemonInfo[indexPath.row].number!
+        cell.num.text = "Call me: \(String(filteredPokemonInfo[indexPath.row].number))"
+//        cell.number = filteredPokemonInfo[indexPath.row].number
         return cell
     }
     

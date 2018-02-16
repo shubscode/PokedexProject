@@ -13,7 +13,6 @@ class PokemonTableViewCell: UITableViewCell {
     var button: UIButton!
     var name: UILabel!
     var num: UILabel!
-    var number: Int!
     
     override func awakeFromNib() {
         pokeImageView = UIImageView(frame: CGRect(x:20, y:15, width: 77, height:77))
@@ -35,7 +34,6 @@ class PokemonTableViewCell: UITableViewCell {
         contentView.addSubview(name)
         
         num = UILabel(frame: CGRect(x:125, y:55, width: 200, height:30))
-        num.text = "Call me: \(number)"
         num.textColor = UIColor.darkGray
         contentView.addSubview(num)
     }
