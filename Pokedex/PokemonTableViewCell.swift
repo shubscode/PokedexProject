@@ -28,7 +28,7 @@ class PokemonTableViewCell: UITableViewCell {
         //        button.addTarget(self, action: #selector(toProfile), for: .touchUpInside)
         //        contentView.addSubview(button)
         
-        name = UILabel(frame: CGRect(x:125, y:25, width: 200, height:30))
+        name = UILabel(frame: CGRect(x:125, y:25, width: 240, height:30))
         name.textColor = UIColor.black
         name.font = UIFont.boldSystemFont(ofSize: 25)
         contentView.addSubview(name)
