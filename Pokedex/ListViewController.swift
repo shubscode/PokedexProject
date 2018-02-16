@@ -130,12 +130,18 @@ class ListViewController: UIViewController {
     
     // renders tableView
     func makeList() {
+        
         collectionView.removeFromSuperview()
         
         tableView = UITableView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                 style: UITableViewStyle.plain)
-        tableView.register(PokemonCollectionViewCell.self, forCellReuseIdentifier: "poke")
+        tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "poke")
         tableView.backgroundColor = UIColor.green
+        collectionView.backgroundColor = UIColor.white
+        collectionView.clipsToBounds = true
+        
+        tableView.delegate = self
+        tableView.dataSource = self
         
         view.addSubview(tableView)
     }
@@ -144,9 +150,7 @@ class ListViewController: UIViewController {
         if segue.identifier == "toProfile" {
             let VC = segue.destination as! TabBarController
             
-            print(filteredPokemonInfo[0])
             VC.pokemonHolder = filteredPokemonInfo[indexSelected]
-//            VC.pokemonImgHolder = filteredPokemon[indexSelected]
             
         }
     }
@@ -223,37 +227,74 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     
 }
 
-//extension ListViewController: UITableViewDelegate, UITableViewDataSource {
-//    
+extension ListViewController: UITableViewDelegate, UITableViewDataSource {
+    
+    // specifying number of sections in the CV
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return filteredPokemon.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
+            as! PokemonTableViewCell
+        
+//        for sv in cell.contentView.subviews {
+//            sv.removefromSuperview()
+//        }
+        
+        cell.awakeFromNib()
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        let pokeCell = cell as! PokemonTableViewCell
+        pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
+        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        indexSelected = indexPath.row
+        print(indexSelected)
+        self.performSegue(withIdentifier: "toProfile", sender: self)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
+}
+
+//extension PokemonViewController: UITableViewDataSource, UITableViewDelegate {
+
 //    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-////        let cell = tableView.dequeueReusableCell(withIdentifier: "poke", for: indexPath)
-////            as!PokemonCollectionViewCell
-////        cell.awakeFromNib()
-////        cell.delegate = self
-////        return cell
-//    }
-//    
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return filteredPokemon.count
-//    }
-//    
 //
-////    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-////        <#code#>
-////    }
-////
-//    func numberOfSections(in tableView: UITableView) -> Int {
-//        return 3
+//        cell.awakeFromNib()
+//        cell.nameLabel.text = pokemonResults[indexPath.row].name
+//        if let pokemonPictureURL = URL(string: pokemonResults[indexPath.row].imageUrl) {
+//            let data = try? Data(contentsOf: pokemonPictureURL)
+//
+//            if data != nil{
+//
+//                cell.cellImg.image = UIImage(data: data!)
+//            }
+//
+//        } else {
+//            cell.cellImg.image = #imageLiteral(resourceName: "images")
+//        }
+//        return cell
 //    }
-//    
-////    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-////        <#code#>
-////    }
-//    
-////    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-////        let cell = tableView.dequeueReusableCell(withIdentifier: "yourCell", for: indexPath)
-////        cell.textLabel?.text = "Cell at row \(indexPath.row)"
-////        return cell
-////    }
-//    
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        pokemonToPass = pokemonResults[indexPath.row]
+//        performSegue(withIdentifier: "segueToPokemonProfile", sender: self)
+//    }
+
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return 50
+//    }
+
 //}
+
