@@ -36,9 +36,9 @@ class ListViewController: UIViewController {
         if !randomlyGenerated {
             filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
         }
-        filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
+        //filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
         
-        print("Load Count: \(filteredPokemon.count)")
+        print("Load Count: \(filteredPokemonInfo.count)")
         
         super.loadView()
         let items = ["Grid", "List"]
@@ -177,7 +177,7 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     // specifying number of cells in the given section
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
 //        print(filteredPokemon.count)
-        return filteredPokemon.count
+        return filteredPokemonInfo.count
 //        return 2
     }
     
@@ -186,6 +186,11 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "poke", for: indexPath)
             as!PokemonCollectionViewCell
         cell.awakeFromNib()
+        
+        cell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
+        print("tried to get image")
+        cell.name.text = filteredPokemonInfo[indexPath.row].name
+        //cell.pokeImageView.image =
         return cell
     }
     
@@ -193,8 +198,11 @@ extension ListViewController: UICollectionViewDelegate, UICollectionViewDataSour
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         let pokeCell = cell as! PokemonCollectionViewCell
         //print(filteredPokemon[indexPath.row])
-        pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
-        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
+        //pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
+//        pokeCell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
+//        print("tried to get image")
+//        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
+//        print("assigned name")
     }
     
     // sets the size of the cell
