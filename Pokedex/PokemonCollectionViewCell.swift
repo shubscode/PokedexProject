@@ -14,7 +14,7 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     var name: UILabel!
     
     override func awakeFromNib() {
-        pokeImageView = UIImageView(frame: CGRect(x:20, y:15, width: 105, height:105))
+        pokeImageView = UIImageView(frame: CGRect(x:20, y:15, width: 77, height:77))
         pokeImageView.contentMode = .scaleAspectFill
         pokeImageView.layer.cornerRadius = 10
         pokeImageView.clipsToBounds = true
