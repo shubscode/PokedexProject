@@ -184,9 +184,26 @@ class PokemonInfoViewController: UIViewController {
     
     func toSearch() {
         let webView = UIWebView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: view.frame.height))
-        webView.loadRequest(NSURLRequest(url: NSURL(string: "https://google.com/search?q=\(pokemonSelected!.name!)")! as URL) as URLRequest)
-        view.addSubview(webView)
+        let url = "https://google.com/search?q=\(pokemonSelected!.name!)"
+        if verifyUrl(urlString: url) {
+            webView.loadRequest(NSURLRequest(url: NSURL(string: "https://google.com/search?q=\(pokemonSelected!.name!)")! as URL) as URLRequest)
+            view.addSubview(webView)
+        } else {
+            let alert = UIAlertController(title: "URL Not Found", message: "\(pokemonSelected!.name!) does not have a valid URL", preferredStyle: UIAlertControllerStyle.alert)
+            alert.addAction(UIAlertAction(title: "Dismiss", style: UIAlertActionStyle.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
     }
+    
+    func verifyUrl(urlString: String?) -> Bool {
+        if let urlString = urlString {
+            if let url = URL(string: urlString) {
+                return UIApplication.shared.canOpenURL(url)
+            }
+        }
+        return false
+    }
+    
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
