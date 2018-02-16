@@ -176,6 +176,11 @@ class PokemonInfoViewController: UIViewController {
         webView.loadRequest(NSURLRequest(url: NSURL(string: "https://google.com/search?q=\(pokemonSelected!.name!)")! as URL) as URLRequest)
         view.addSubview(webView)
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        super.viewWillAppear(animated)
+    }
 
 
     

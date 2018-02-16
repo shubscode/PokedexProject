@@ -218,7 +218,7 @@ class ViewController: UIViewController {
             randomOrNot = false
         }
         readInputs()
-        if minAtk == 0 && minDef == 0 && minHp == 0 {
+        if minAtk == 0 && minDef == 0 && minHp == 0 && typesSelected.isEmpty {
             for poke in pokemonList {
                 if pokeName == poke.name || Int(pokeName) == poke.number {
                     print("i came hee")
