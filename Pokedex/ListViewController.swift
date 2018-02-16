@@ -22,21 +22,30 @@ class ListViewController: UIViewController {
     var sc: UISegmentedControl!
     
     var filteredPokemonInfo = [Pokemon]()
-    var filteredPokemon = [UIImage]()
     var thePokemon: Pokemon!
 
     var randomlyGenerated = false
     
     var indexSelected: Int!
     
+    func changeView(sender: UISegmentedControl) {
+        switch sender.selectedSegmentIndex {
+        case 1:
+            makeList()
+        default:
+            makeGrid()
+        }
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.isNavigationBarHidden = false;
+    }
     
-    override func loadView() {
-        
+    override func viewDidLoad() {
+        super.viewDidLoad()
         if !randomlyGenerated {
             filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
         }
-        //filteredPokemon = getPokemonImages(pokemon: filteredPokemonInfo)
         
         print("Load Count: \(filteredPokemonInfo.count)")
         
@@ -68,25 +77,6 @@ class ListViewController: UIViewController {
         
         view.addSubview(collectionView)
         view.addSubview(sc)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationController?.isNavigationBarHidden = false;
-    }
-    
-    func changeView(sender: UISegmentedControl) {
-        switch sender.selectedSegmentIndex {
-        case 1:
-            makeList()
-        default:
-            makeGrid()
-        }
-    }
-    
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -126,15 +116,13 @@ class ListViewController: UIViewController {
         tableView = UITableView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
                                 style: UITableViewStyle.plain)
         tableView.register(PokemonTableViewCell.self, forCellReuseIdentifier: "poke")
-        collectionView.backgroundColor = UIColor.white
-        collectionView.clipsToBounds = true
+        tableView.backgroundColor = UIColor.white
+        tableView.clipsToBounds = true
         
         tableView.delegate = self
         tableView.dataSource = self
         
         view.addSubview(tableView)
-        print("I made a table")
-
     }
     /***********************************************************************************************************/
 
