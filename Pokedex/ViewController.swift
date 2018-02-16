@@ -207,7 +207,10 @@ class ViewController: UIViewController {
     @objc func toSearch (_ sender: UIButton) {
         if sender.titleLabel?.text == "Featured Pokémon" {
             randomOrNot = true
+        } else {
+            randomOrNot = false
         }
+    
         readInputs()
         self.performSegue(withIdentifier: "toSearch", sender: sender)
         
