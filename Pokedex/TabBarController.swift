@@ -31,9 +31,7 @@ class TabBarController: UITabBarController {
         self.viewControllers = [tab1, tab2]
         
         tab1.tabBarItem = UITabBarItem(title: "PokeFile", image: nil, tag: 0)
-        
-         //tab1.tabBarItem.image = UIImage(named: "profileIcon")
-        
+                
         tab2.tabBarItem = UITabBarItem(title: "Favorites", image: nil, tag: 1)
         
         

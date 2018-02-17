@@ -231,10 +231,6 @@ class ViewController: UIViewController {
         self.performSegue(withIdentifier: "toSearch", sender: sender)
     }
     
-//    @objc func searchRandomly() {
-//
-//        self.performSegue(withIdentifier: "toSearch", sender: Any?.self)
-//    }
     @objc func typeSelect(sender: UIButton) {
         
         UIButton.animate(withDuration: 0.2,
@@ -256,7 +252,6 @@ class ViewController: UIViewController {
             typesSelected.insert(type)
             sender.backgroundColor = customPurple
         }
-        print(typesSelected)
     }
     
 

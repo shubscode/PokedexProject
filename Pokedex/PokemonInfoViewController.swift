@@ -26,20 +26,6 @@ class PokemonInfoViewController: UIViewController {
     var speedLabel: UILabel!
     var totalLabel: UILabel!
     
-//    var pokemonSelected: Pokemon
-    
-//    var nameD: String!
-//    var number: Int!
-//    var attack: Int!
-//    var defense: Int!
-//    var health: Int!
-//
-//    var specialAttack: Int!
-//    var specialDefense: Int!
-//    var species: String!
-//    var speed: Int!
-//    var total: Int!
-    
     var types: [String] = []
     var imageUrl: String!
     
@@ -49,13 +35,10 @@ class PokemonInfoViewController: UIViewController {
     var customPurple = UIColor(red: 0.6863, green: 0.2902, blue: 0.698, alpha: 1.0)
     var customPurple2 =  UIColor(red: 0.5176, green: 0.4392, blue: 0.9569, alpha: 1.0)
     
-    //let tabBarController = UITabBarController()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-         //self.tabBarController?.tabBar.items![0].image = UIImage(named: "profileIcon")
         
         imageView = UIImageView(frame: CGRect(x: 20, y: 100, width: view.bounds.width - 38, height: 200))
         let pokeImage = getImageFromURL(imageUrl: pokemonSelected!.imageUrl)
@@ -203,24 +186,10 @@ class PokemonInfoViewController: UIViewController {
         }
         return false
     }
-    
-    
+        
     override func viewWillAppear(_ animated: Bool) {
         self.navigationController?.setNavigationBarHidden(false, animated: animated)
         super.viewWillAppear(animated)
     }
-
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

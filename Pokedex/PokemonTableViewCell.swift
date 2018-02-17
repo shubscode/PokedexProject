@@ -21,13 +21,6 @@ class PokemonTableViewCell: UITableViewCell {
         pokeImageView.layer.borderColor = UIColor.black.cgColor
         contentView.addSubview(pokeImageView) //remember to add UI elements to the contentView not the cell itself
         
-        //        button = UIButton(frame: CGRect(x:20, y:15, width: 100, height:100))
-        //        button.layer.cornerRadius = 10
-        //        button.clipsToBounds = true
-        //        button.tag = 34
-        //        button.addTarget(self, action: #selector(toProfile), for: .touchUpInside)
-        //        contentView.addSubview(button)
-        
         name = UILabel(frame: CGRect(x:125, y:25, width: 240, height:30))
         name.textColor = UIColor.black
         name.font = UIFont.boldSystemFont(ofSize: 25)

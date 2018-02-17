@@ -27,7 +27,6 @@ func getPokemonImages(pokemon: [Pokemon]) -> [UIImage] {
 
 func filterPokemon(name: String?, typeFilter: Set<String>, minAtk: Int?, minDef: Int?, minHP: Int?) -> [Pokemon] {
     var filtered = pokemonList
-    //assignVals(name: name, typeFilter: typeFilter, minAtk: minAtk, minDef: minDef, minHP: minHP)
     if let filterName = name {
         if (Int(filterName) != nil) {
             for pokemon in filtered {

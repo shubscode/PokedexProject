@@ -17,8 +17,6 @@ class FavoritesViewController: UIViewController {
 
     override func viewDidLoad() {
         
-        //view.backgroundColor = .purple
-        
         titleLabel = UILabel(frame: CGRect(x: 0, y: 50, width: view.bounds.width, height: 120))
         titleLabel.text = "My Favorites"
         titleLabel.font = titleLabel.font.withSize(60)
@@ -59,22 +57,6 @@ class FavoritesViewController: UIViewController {
         self.view.insertSubview(backgroundImage, at: 0)
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
@@ -94,10 +76,7 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         
         cell.awakeFromNib()
         
-        
-        //        for sv in cell.contentView.subviews {
-        //            sv.removefromSuperview()
-        //        }
+
         
         let image = favoritePokemon[indexPath.row].getImageFromURL()
         print(image)
@@ -105,12 +84,6 @@ extension FavoritesViewController: UITableViewDelegate, UITableViewDataSource {
         cell.name.text = favoritePokemon[indexPath.row].name
         return cell
     }
-    
-    //    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-    //        let pokeCell = cell as! PokemonTableViewCell
-    //        pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
-    //        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
-    //    }
     
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

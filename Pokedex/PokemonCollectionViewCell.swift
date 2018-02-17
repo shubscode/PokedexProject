@@ -15,7 +15,6 @@ class PokemonCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         pokeImageView = UIImageView(frame: CGRect(x:22, y:15, width: 77, height:77))
-//        pokeImageView.contentMode = .scaleAspectFill
         pokeImageView.layer.cornerRadius = 10
         pokeImageView.clipsToBounds = true
         pokeImageView.layer.borderColor = UIColor.black.cgColor

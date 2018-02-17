@@ -50,12 +50,8 @@ class ListViewController: UIViewController {
             filteredPokemonInfo = filterPokemon(name: name, typeFilter: pokeType, minAtk: atk, minDef: def, minHP: hp)
         }
         
-        print("Load Count: \(filteredPokemonInfo.count)")
         if (filteredPokemonInfo.count == 0) {
             raiseInvalidTypeAlert()
-//            emptyImage = UIImageView(frame: CGRect(x: 25, y:80, width: view.frame.width-50, height: 40))
-//            emptyImage.image = #imageLiteral(resourceName: "placeholderpoke")
-//            contentsView.addSubview(emptyImage)
         }
         
         super.loadView()
@@ -65,9 +61,6 @@ class ListViewController: UIViewController {
         backgroundImage.contentMode = UIViewContentMode.scaleAspectFill
         self.view.insertSubview(backgroundImage, at: 0)
         self.view.tintColor = UIColor.black
-//        self.view.
-        
-//        self.view.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.12)
 
 
         let items = ["Grid", "List"]
@@ -90,7 +83,6 @@ class ListViewController: UIViewController {
         
         UI = UICollectionView(frame: CGRect(x: 0, y:0, width: view.frame.width, height: 135),
                               collectionViewLayout: layout)
-//        UI.register(PokemonCollectionViewCell.self, forCellWithReuseIdentifier: "poke")
         UI.backgroundColor = UIColor(red: 0.4176, green: 0.3392, blue: 0.856, alpha: 0.22)
         
         collectionView = UICollectionView(frame: CGRect(x: 0, y:135, width: view.frame.width, height: view.frame.height-135),
@@ -104,7 +96,6 @@ class ListViewController: UIViewController {
         view.addSubview(UI)
         view.addSubview(collectionView)
         view.addSubview(sc)
-        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
@@ -204,16 +195,7 @@ UICollectionViewDelegateFlowLayout{
         return cell
     }
     
-//    // use this method to populate the data of a given cell
-//    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-//        let pokeCell = cell as! PokemonCollectionViewCell
-//        //print(filteredPokemon[indexPath.row])
-//        //pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
-////        pokeCell.pokeImageView.image = filteredPokemonInfo[indexPath.row].getImageFromURL()
-////        print("tried to get image")
-////        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
-////        print("assigned name")
-//    }
+
     
     // sets the size of the cell
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -260,15 +242,9 @@ extension ListViewController: UITableViewDelegate, UITableViewDataSource {
         cell.pokeImageView.image = image
         cell.name.text = filteredPokemonInfo[indexPath.row].name
         cell.num.text = "Call me: \(String(filteredPokemonInfo[indexPath.row].number))"
-//        cell.number = filteredPokemonInfo[indexPath.row].number
         return cell
     }
     
-//    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-//        let pokeCell = cell as! PokemonTableViewCell
-//        pokeCell.pokeImageView.image = filteredPokemon[indexPath.row]
-//        pokeCell.name.text = filteredPokemonInfo[indexPath.row].name
-//    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         indexSelected = indexPath.row
